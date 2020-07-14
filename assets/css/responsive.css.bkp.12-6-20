@@ -1,0 +1,1279 @@
+
+
+
+
+/***************************** Custom *******************************/
+
+
+
+@media (max-width: 2560px) {}
+
+
+
+@media (max-width: 1920px) {}
+
+
+
+@media (max-width: 1800px) {
+
+}
+
+
+
+@media (max-width: 1600px) {
+
+
+
+}
+
+
+
+@media (max-width: 1440px) {
+
+/****goutam 16-1****/
+
+.cmmn_title h2 {
+
+    font-size: 23px;
+
+}
+
+.form-group label {
+
+    font-size: 15px;
+
+}
+
+.form-group .form-control, .form-group select {
+
+    font-size: 15px;
+
+}
+
+.form-group input::-webkit-input-placeholder, .form-group select::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+
+    font-size:15px;
+
+}
+
+.form-group input::-moz-placeholder, .form-group select::-moz-placeholder { /* Firefox 19+ */
+
+    font-size:15px;
+
+}
+
+.form-group input:-ms-input-placeholder, .form-group select:-ms-input-placeholder { /* IE 10+ */
+
+    font-size:15px;
+
+}
+
+.form-group input:-moz-placeholder, .form-group select:-moz-placeholder{ /* Firefox 18- */
+
+    font-size:15px;
+
+}
+
+.container {
+
+    font-size: 15px;
+
+}
+
+.formbtn {
+
+    font-size: 16px;
+
+    padding: 15px 50px;
+
+}
+
+.cmmn_title p {
+
+    font-size: 17px;
+
+}
+
+.plasec_one {
+
+    font-size: 27px;
+
+}
+
+.dashboard-tab-innr ul li span {
+
+font-size: 14px;
+
+padding-bottom: 6px;
+
+}
+
+.dashboard-tab-innr ul li {
+
+    padding: 0 20px 20px;
+
+}
+
+.cmmn_title h2 {
+
+    font-size: 22px;
+
+}
+
+.personalinfo_sec {
+
+    padding: 20px 25px;
+
+}
+
+.passchange_sec {
+
+    padding: 20px 20px;
+
+}
+
+.planinf {
+
+    padding: 25px 0 25px;
+
+}
+
+.pricein_sec strong {
+
+    font-size: 22px;
+
+}
+
+.pricein_sec p {
+
+    font-size: 14px;
+
+}
+
+.dsmflx_qer span {
+
+    font-size: 13px;
+
+}
+
+.pfd {
+
+    font-size: 14px;
+
+}
+
+.plan_chartinfo_top, .plan_chartinfo_mid, .plan_chartinfo_foo {
+
+    padding: 15px 10px;
+
+}
+
+.plan_top_sec em {
+
+    height: 58px;
+
+    margin-top: 5px;
+
+}
+
+.plan_top_sec em img {
+
+    width: 50%;
+
+}
+
+.plan_chartinfo_foo .btn {
+
+    font-size: 14px;
+
+    padding: 8px 25px;
+
+}
+
+.plan_chartinfo_top, .plan_chartinfo_mid, .plan_chartinfo_foo {
+
+    padding: 10px 10px;
+
+}
+
+.top20 {
+
+    padding-top: 9px;
+
+}
+
+.capa-innr .col-md-4 {
+
+    margin-bottom: 15px;
+
+}
+
+.cmmn_title hr {
+
+    margin: 12px 0;
+
+}
+.login_body_sec {
+    padding: 55px 0;
+}
+.log_logosec.cmmn_title h2 {
+    margin: 20px 0;
+}
+.form-group .form-control, .form-group select { padding: 10px 0; }
+.form-group {
+    margin-bottom: 15px;
+}
+.pdng35 {
+    padding-top: 20px;
+}
+.logbtn936 p {
+    padding-top: 15px;
+}
+/*pol*/
+ .sr-no-innr h5 {
+     font-size: 14px;
+    }
+.prov-txt h4 {
+    font-size: 16px;
+    margin-bottom: 2px;
+    }
+.prov-txt h6, .prov-txt h6 a {
+    font-size: 14px;
+    }
+.prov-txt h6 strong {
+    line-height: 20px;
+}
+.dashboard-tab-innr .provider-list-innr ul li {
+    padding: 12px 0;
+    }
+.prov-btn .btn {
+    font-size: 14px;
+    padding: 10px 22px;
+    }
+.txt-innr p {
+    font-size: 15px;
+    line-height: 24px;
+}
+}
+
+
+
+@media (max-width: 1366px) {
+
+
+
+}
+
+
+
+@media (max-width: 1280px) {
+
+ul.list_plas li:last-child span {
+
+    padding-bottom: 6px;
+
+}
+
+.dashboard-tab-innr ul li span {
+
+    font-size: 14px;
+
+}
+ul.navbar-nav li a, .footer-bottom-innr p, .hdr-btn a {
+    font-size: 15px;
+}
+}
+
+@media (max-width:1199px) {
+
+.container-fluid {
+
+    width: 95%;
+
+}
+
+.dsmflx_qer span {
+
+    font-size: 11px;
+
+    line-height: 13px;
+
+}
+
+.pricein_sec strong {
+
+    font-size: 19px;
+
+}
+
+}
+
+@media (max-width:1080px) {
+
+.dashboard-tab-innr .cr-list ul li em,.dashboard-tab-innr .cr-list ul li h4, .dashboard-tab-innr .cr-list ul li a {
+
+	font-size: 13px;
+
+}
+
+	
+
+	.dashboard-tab-innr .plan_chartinfo_top .cr-list ul li::after, .dashboard-tab-innr .plan_chartinfo_mid .cr-list ul li::after {
+
+	height: 18px;
+
+	width: 19px;
+
+}
+
+	.cr-lft {
+
+	width: 70%;
+
+}
+
+	.mb-pic {
+
+	padding: 0 65px;
+
+}
+
+	.dashboard-tab-innr .cr-list ul li {
+
+	padding: 0 0px 20px 30px;
+
+}
+
+/* AM-20.20 */
+
+.file-upload h5 {
+
+    font-size: 16px;
+
+}
+
+.account_subtabsec {
+
+    padding: 25px 15px;
+
+}
+
+.cmmn_title p, .cmmn_title span {
+
+    font-size: 16px;
+
+}
+
+.neimg_cls, .neimg_cls2 {
+
+    font-size: 16px;
+
+}
+/*pol*/
+.plasec_one {
+    font-size: 23px;
+}
+.sr-no-innr h5 {
+    font-size: 13px;
+}
+.prov-txt h4 {
+    font-size: 14px;
+    }
+.prov-txt h6, .prov-txt h6 a {
+    font-size: 12px;
+}
+.prov-txt h6 strong {
+    line-height: 17px;
+}
+.prov-btn .btn {
+    font-size: 13px;
+    }
+.prov-btn.carr-btn-innr .btn em {
+    font-size: 17px;
+    margin-right: 4px;
+}
+}
+
+
+
+
+
+@media (max-width:1024px) {
+
+.form-group {
+
+    margin-bottom: 15px;
+
+}
+
+.pdng35 {
+
+    padding-top: 20px;
+
+}
+
+footer.footer {
+
+	height: 50px;
+
+}
+
+ul.navbar-nav li a, .footer-bottom-innr p, .hdr-btn a {
+
+    font-size: 14px;
+
+}
+
+section.dasboard_info {
+
+    padding: 25px 0 40px;
+
+}
+.loginbtn, .signbtn {
+padding: 10px 40px !important;
+}
+.navbar-nav {
+    align-items: center;
+}
+/*pol*/
+.dashboard-tab-innr .provider-list-innr ul li {
+    padding: 10px 0;
+}
+.prov-icon-innr {
+    width: 26px;
+    height: 26px;
+    }
+.prov-icon-innr .fa {
+    font-size: 15px;
+}
+.provider-list-outr {
+    padding: 15px 10px 22px;
+    }
+.prov-txt {
+    margin-left: 5px;
+}
+section.dasboard_info {
+    padding: 25px 0 70px;
+}
+}
+
+
+
+@media (max-width: 900px) {
+
+.logo_area {
+
+    width: 185px;
+
+}
+
+.logo_area img {
+
+    width: 100%;
+
+}
+
+.plan_top_sec em img {
+
+    width: 58%;
+
+}
+
+.plan_top_sec em {
+
+    height: 52px;
+
+}
+
+}
+
+
+
+@media (max-width: 812px) {
+
+.profile_info_sec {
+
+    display: block;
+
+}
+
+.personalinfo_sec {
+
+    width: 100%;
+
+}
+
+.passchange_sec {
+
+    width: 100%;
+
+    margin-top: 15px;
+
+}
+
+.pdng35 {
+
+    padding-top: 15px;
+
+}
+
+.cmmn_title h2 {
+
+    font-size: 18px;
+
+}
+
+ul.navbar-nav li {
+
+    margin-right: 5px;
+
+}
+
+	
+
+	.cr-lft {
+
+	width: 100%;
+
+}
+
+	.crr-sec .plan_top_sec1 {
+
+	flex-direction: column;
+
+}
+
+	.cr-rgt {
+
+	width: 100%;
+
+	padding: 30px 0;
+
+}
+.dashboard-tab-innr ul li {
+    padding: 0 12px 12px;
+}
+.dashboard-tab-innr ul li span {
+    margin-left: 22px;
+    font-size: 13px;
+}
+.dashboard-tab-innr ul li a {
+    word-break: break-all;
+}
+.prov-btn .btn {
+    font-size: 12px;
+    padding: 8px 20px;
+}
+.planinf {
+    padding: 15px 0;
+}
+.plasec_one {
+    font-size: 19px;
+}
+.prov-btn.carr-btn-innr .btn em {
+    font-size: 12px;
+    margin-right: 2px;
+}
+.prov-btn.carr-btn-innr .btn.blw {
+    margin-right: 6px;
+    }
+.prov-btn.carr-btn-innr {
+    padding: 0;
+}
+}
+
+
+
+@media (max-width: 768px) {
+
+.dashboard-tab-innr .resp-tab-active span {
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+
+
+}
+
+.dashboard-tab-innr a span{
+
+	color:#1f1f1f;
+
+	font-family: 'Nunito Sans', sans-serif;
+
+	font-weight: 700;
+
+	font-size: 15px;
+
+	padding-left:25px;
+
+}
+
+h2.resp-accordion{
+
+	margin:0 0 15px;
+
+}
+
+h2.resp-accordion a span{
+
+	position:relative;
+
+}
+
+h2.resp-accordion a span::before {
+
+    position: absolute;
+
+    content: '';
+
+    width: 14px;
+
+    height: 14px;
+
+    left: 0;
+
+    border-radius: 100%;
+
+    border: 1px solid #8b8b8b;
+
+	background:#fff;
+
+    top: 0;
+
+    bottom: 0;
+
+    margin: auto;
+
+}
+
+h2.resp-accordion.resp-tab-active a span::before{
+
+	background:#00a69c;
+
+	border: 1px solid #00a69c;
+
+}
+
+.resp-tabs-list {
+
+    display: none !important;
+
+}
+
+.resp-arrow {
+
+    display: none;
+
+}
+
+h2.resp-accordion.resp-tab-active {
+
+	border-bottom: 1px solid #c1c1c1!important;
+
+}
+
+h2.resp-accordion {
+
+	padding: 10px 15px;
+
+}
+
+.hdr-btn em {
+
+    width: 30px;
+
+    height: 30px;
+
+    margin-right: 7px;
+
+}
+
+.container .checkmark::after {
+
+    width: 8px;
+
+    height: 8px;
+
+}
+
+.checkmark {
+
+    height: 22px;
+
+    width: 22px;
+
+}
+
+.formbtn {
+
+    font-size: 14px;
+
+    padding: 12px 40px;
+
+}
+
+.profile_info_sec {
+
+    display: block;
+
+}
+
+.account_tabsec1, .account_tabsec2 {
+
+    width: 100%;
+
+}
+
+.account_tabsec2 { margin-top: 30px; }
+/*pol*/
+
+.txt-innr {
+    padding: 15px 0;
+}
+.dashboard-tab-innr ul li span {
+    margin-left:4px;
+}
+.dashboard-tab-innr a span {
+    padding-left: 14px;
+}
+}
+
+
+
+@media (max-width: 767px) {
+
+.navbar-nav {
+
+    -ms-flex-direction: row;
+
+    flex-direction: row;
+
+}
+
+.navbar-toggler {
+
+    display: none;
+
+}
+
+.navbar-nav a.nav-link em {
+
+    margin-right: 5px;
+
+}
+
+ul.navbar-nav li {
+
+    margin-right: 10px;
+
+}
+
+.capa-innr .col-md-4 {
+
+    width: 50%;
+
+}
+
+.plasec_one {
+
+    font-size: 24px;
+
+}
+.plasec_one {
+    font-size: 20px;
+}
+
+}
+
+
+
+@media (max-width: 667px) {
+
+ul.navbar-nav li a, .footer-bottom-innr p, .hdr-btn a {
+
+    font-size: 12px;
+
+}
+
+.logo_area {
+
+    width: 175px;
+
+}
+
+.hdr-btn a {
+
+    padding: 4px 5px;
+
+}
+.dashboard-tab-innr ul li {
+    padding: 0 6px 8px;
+}
+.dashboard-tab-innr a span {
+    padding-left: 16px;
+}
+.dashboard-tab-innr ul li a::before {
+    width: 9px;
+    height: 9px;
+    top:4px;
+}
+.dashboard-tab-innr ul li span {
+    font-size: 12px;
+}
+.dashboard-tab-innr a span {
+    padding-left: 10px;
+}
+.dashboard-tab-innr ul {
+    flex-wrap: wrap;
+}
+}
+
+
+
+
+
+@media (max-width:600px) {
+
+.loginbdy_cls {
+    width: 85%;
+    padding: 20px 20px;
+}
+.logbtn936 p {
+    padding-top: 10px;
+    font-size: 16px;
+}
+}
+
+
+
+@media (max-width:575px) {
+
+.plasec_one {
+
+    font-size: 22px;
+
+}
+
+.plasec_two span {
+
+    font-size: 15px;
+
+}
+
+.plasec_two form input {
+
+    width: 150px;
+
+}
+
+.personalinfo_sec {
+
+    padding: 20px 15px;
+
+}
+
+.passchange_sec {
+
+    padding: 20px 15px;
+
+}
+
+.logo_area {
+
+    width: 148px;
+
+}
+
+.adr {
+
+    padding: 0 8px;
+
+}
+
+.container {
+
+    padding-left: 30px;
+
+}
+
+	.dashboard-tab-innr .cr-list ul li em, .dashboard-tab-innr .cr-list ul li h4, .dashboard-tab-innr .cr-list ul li a {
+
+	font-size: 11px;
+
+}
+
+	.dashboard-tab-innr .cr-list ul li {
+
+	display: block;
+
+}
+
+	.dashboard-tab-innr .cr-list ul li {
+
+	padding: 0 0px 12px 30px;
+
+}
+
+	.dashboard-tab-innr .plan_chartinfo_top .cr-list ul li::after, .dashboard-tab-innr .plan_chartinfo_mid .cr-list ul li::after {
+
+	top: 7px;
+
+}
+ul.navbar-nav li:not(:last-child) {
+    margin-right: 15px;
+}
+.loginbtn, .signbtn {
+    padding: 8px 28px !important;
+}
+
+header {
+    padding: 10px 0;
+}
+
+.capa-innr .col-md-4 {
+    width: 100%;
+}
+.plan_top_sec em img {
+    width: 70px;
+}
+}
+
+
+
+
+
+@media (max-width:484px) {
+
+.pdng35 {
+
+    padding-top: 10px;
+
+}
+
+.plasec_two form {
+
+    padding-left: 5px;
+
+}
+
+header {
+
+    height: auto;
+
+    padding-top:10px;
+
+}
+
+.cus_nav_innr.d-flex {
+
+    display: block !important;
+
+}
+
+.logo_area {
+
+    margin: auto;
+
+}
+
+.right_nav.d-flex {
+
+    -webkit-box-pack: center;
+
+-ms-flex-pack: center;
+
+justify-content: center;
+
+}
+
+.plasec_two select {
+
+    height: 30px;
+
+}
+
+.plasec_one {
+
+    font-size: 18px;
+
+}
+
+.adflx .container:not(:last-child) {
+
+    margin-right: 7px;
+
+}
+
+.capa-innr .col-md-4 {
+
+    width: 100%;
+
+}
+
+.plan_top_sec em img {
+
+    width: 40%;
+
+}
+
+.adflx label:not(:last-child) {
+
+    margin-bottom: 10px;
+
+}
+
+.adflx {
+
+    display: block;
+
+}
+
+.file-upload-input1, .file-upload-input2 {
+
+    margin: auto;
+
+    width: 100%;
+
+    left: 0;
+
+    right: 0;
+
+}
+.loginbdy_cls {
+    width: 100%;
+    padding: 20px 15px;
+}
+.log_logosec.cmmn_title h2 {
+    margin: 17px 0;
+}
+.login_body_sec {
+    padding: 40px 0;
+}
+.log_logosec img {
+    width: 160px;
+}
+.loginbtn, .signbtn {
+    padding: 5px 20px !important;
+}
+section {
+    min-height: 100vh;
+}
+.dashboard-tab-innr ul li span {
+    font-size: 11px;
+    margin-left: 2px;
+}
+.container-fluid {
+    width: 100%;
+}
+
+}
+
+
+
+@media (max-width:420px) {
+
+.planinf {
+
+    display: block !important;
+
+}
+
+.plasec_one {
+
+    text-align: center;
+
+    margin: 0 0 10px;
+
+}
+
+.plasec_two {
+
+    justify-content: center;
+
+}
+
+.account_sec {
+
+    padding: 20px 15px;
+
+}
+
+.account_subtabsec {
+
+    padding: 25px 10px;
+
+}
+.dashboard-tab-innr ul {
+    display: block;
+}
+.dashboard-tab-innr ul li {
+    padding: 0 0 8px;
+}
+.dashboard-tab-innr ul li span {
+    font-size: 12px;
+    margin-left: 5px;
+}
+.dashboard-tab-innr ul li a::before {
+    top: 2px;
+}
+.account_sec {
+    margin-top: 25px;
+}
+}
+
+
+
+@media (max-width:384px) {
+
+/*.plasec_two select {
+
+    margin-right: 7px;
+
+}
+
+.plasec_two span {
+
+    margin-right: 5px;
+
+}
+
+.plasec_two form input {
+
+    width: 140px;
+
+}*/
+
+.plasec_two {
+
+    flex-wrap: wrap;
+
+    justify-content: center;
+
+}
+
+.plasec_two form{
+
+	margin-top:10px;
+
+}
+
+.adflx {
+
+    -ms-flex-wrap: wrap;
+
+        flex-wrap: wrap;
+
+}
+
+.adflx label {
+
+    margin-bottom: 7px;
+
+}
+
+.form-group .form-control, .form-group select {
+
+    padding: 9px 0;
+
+}
+
+.adflx label {
+
+    width: 50%;
+
+}
+
+label.container {
+
+    margin-left: 0;
+
+}
+
+.pricein_sec strong {
+
+    font-size: 18px;
+
+}
+
+.plan_top_sec em img {
+
+    width: 50%;
+
+}
+
+section.dasboard_info {
+
+
+
+    padding: 25px 0 20px;
+
+
+
+}
+section.dasboard_info {
+    padding: 25px 0 55px;
+}
+.hdr-btn em {
+    width: 26px;
+    height: 23px;
+    margin-right: 5px;
+}
+ul.navbar-nav li a, .footer-bottom-innr p, .hdr-btn a {
+    font-size: 11px;
+}
+.navbar-nav a.nav-link em {
+    margin-right: 2px;
+}
+ul.navbar-nav li:not(:last-child) {
+    margin-right: 7px;
+}
+}
+
+@media (max-width:360px) {
+
+.right_nav.d-flex {
+
+    display: block !important;
+
+}
+
+.adr {
+
+    padding: 0 0 0 130px;
+
+}
+
+.hdr-btn {
+
+    padding-bottom: 10px;
+
+}
+
+.navbar-nav {
+
+    justify-content: center;
+
+}
+
+}
+
+
+
+@media (max-width:320px) {
+
+.adflx .container:not(:last-child) {
+
+    margin-right: -10px;
+
+}
+
+}
+
+
+
+@media (max-width:330px) {}
+
+
+
