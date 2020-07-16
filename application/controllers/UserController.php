@@ -587,7 +587,7 @@ class UserController extends CI_Controller
 <option value="">Select income</option>
 <?php
 		foreach ($income as $key => $value) : ?>
-<option value="<?php echo $value ?>"><?php echo $key + 1 ?> Adults in my household making $<?php echo $value ?></option>
+<option value="<?php echo ($key + 1 )." Adults in my household making $".$value ?>"><?php echo $key + 1 ?> Adults in my household making $<?php echo $value ?></option>
 <?php endforeach;
 	}
 	// end consumer

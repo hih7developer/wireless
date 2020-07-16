@@ -4,6 +4,14 @@ application/config/config.php
 
 application/config/database.php
 
+application/upload/lifeline/*
+
+application/upload/lifeline_pdf/*
+
+application/upload/signature/*
+
+application/upload/household_worksheet/*
+
 application/cache/*
 !application/cache/index.html
 

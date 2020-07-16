@@ -86,7 +86,13 @@ class AdminViewListController extends CI_Controller
 
 
 		$data['application'] = $this->ApplicationModel->get_applier_details_by_id($application_id);
+		$data['plan'] = $this->db->get_where('plans', ['plan_id' => $data['application']['plan_id']])->row();
+		$data['is_lifeline'] = $data['plan']->lifeline_service == 1 ? true : false;
 
+		// echo '<pre>';
+		// print_r($data);
+		// echo '</pre>';
+		// die;
 		$this->load->view('applier_profile', $data);
 	}
 

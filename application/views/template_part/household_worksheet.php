@@ -15,6 +15,7 @@
             </label>
         </div>
 
+		<div class="invalid-feedback"> Please select an answer. </div>
 
         <small class="help-text text-muted">Adults are people who are 18 years old or older, or who are emancipated
             minors. This can include a spouse, domestic partner, parent, adult son or daughter, adult in your family,
@@ -36,7 +37,9 @@
                     value="no">
                 <span class="checkmark"></span>
             </label>
-        </div>
+		</div>
+		<div class="invalid-feedback"> Please select an answer. </div>
+		
     </div>
 
 
@@ -53,7 +56,9 @@
                     value="no">
                 <span class="checkmark"></span>
             </label>
-        </div>
+		</div>
+		<div class="invalid-feedback"> Please select an answer. </div>
+		
         <small class="help-text text-muted">This can be the cost of bills, food, etc., and income. If you are married,
             you should check yes for this question.</small>
     </div>
@@ -70,10 +75,12 @@
             <button type="button" class='btn btn-sm btn-priamry' data-toggle="modal"
                 data-target="#signatureModelOne">Signature</button>
             <img class="signatureOneImg" src="" alt="">
+			<div class="invalid-feedback sign-invalid-feedback"> Please sign here. </div>
         </div>
         <div class="form-group col-md-6">
-            <input type="text" name="household[date][]" id="" class="form-control datepicker" placeholder="Date"
+            <input type="text" name="" id="" class="form-control datepicker" placeholder="Date"  value="<?php echo date('m/d/Y') ?>"
                 aria-describedby="helpId">
+			<div class="invalid-feedback date-invalid-feedback"> Please select an answer. </div>
         </div>
         <div class="form-group col-md-12">
             <small class="text-muted">I live at an address with more than one household.</small>
@@ -94,11 +101,13 @@
             <button type="button" class='btn btn-sm btn-priamry' data-toggle="modal"
                 data-target="#signatureModelOne">Signature</button>
             <img class="signatureOneImg" src="" alt="">
+			<div class="invalid-feedback sign-invalid-feedback"> Please sign here. </div>
         </div>
 
         <div class="form-group col-md-6">
-            <input type="text" name="" id="" class="form-control datepicker" placeholder="Date"
+            <input type="text" id="" class="form-control datepicker" placeholder="Date"  value="<?php echo date('m/d/Y') ?>"
                 aria-describedby="helpId">
+			<div class="invalid-feedback date-invalid-feedback"> Please select an answer. </div>
         </div>
         <div class="form-group col-md-12">
             <small class="text-muted">I live at an address with more than one household.</small>
@@ -109,11 +118,13 @@
             <button type="button" class='btn btn-sm btn-priamry' data-toggle="modal"
                 data-target="#signatureModelTwo">Signature</button>
             <img class="signatureTwoImg" src="" alt="">
+			<div class="invalid-feedback sign-invalid-feedback"> Please sign here. </div>
         </div>
 
         <div class="form-group col-md-6">
-            <input type="text" name="household[date][]" id="" class="form-control datepicker" placeholder="Date"
+            <input type="text" name="household[date][]" id="" class="form-control datepicker" placeholder="Date" value="<?php echo date('m/d/Y') ?>"
                 aria-describedby="helpId">
+			<div class="invalid-feedback date-invalid-feedback"> Please select an answer. </div>
         </div>
         <div class="form-group col-md-12">
             <small class="text-muted">I understand that the one-per-household limit is a Federal Communications

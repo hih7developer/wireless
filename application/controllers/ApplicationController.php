@@ -3,6 +3,8 @@
 require_once('./vendor/autoload.php');
 
 use Postmark\PostmarkClient;
+use Dompdf\Dompdf;
+
 
 
 class ApplicationController extends CI_Controller
@@ -100,10 +102,13 @@ class ApplicationController extends CI_Controller
 		return $this->load->view('application_eligibility_check', $data);
 	}
 
-
 	public function nv_check($plan_id)
 	{
 
+		$this->session->unset_tempdata('nv_response');
+		$this->session->unset_tempdata('lifeline_certificate');
+		$this->session->unset_tempdata('household_worksheet');
+		$this->session->unset_tempdata('household');
 
 		//profile update
 		$user_id = $this->session->userdata('user_id');
@@ -137,13 +142,17 @@ class ApplicationController extends CI_Controller
 		}
 		//end        
 
-
+		$is_lifeline = $this->db->get_where('plans', ['plan_id' => $plan_id])->row()->lifeline_service == 1 ? true : false;
+		if(!$is_lifeline){
+			$this->session->set_tempdata('application_apply', ['user_id' => $user_id, 'plan_id' => $plan_id], 300 * 2);
+			redirect('application/confirm/' . $plan_id);
+		}
 
 
 		// state check
 		if (in_array($consumer['state_id'], [6, 43, 51, 53])) {
 			$this->session->set_tempdata('application_apply', ['user_id' => $user_id, 'plan_id' => $plan_id], 300 * 2);
-			redirect('application/eligibility_check/without_nv/' . $plan_id);
+			redirect('application/lifeline_program/' . $plan_id);
 		}
 		// state check
 
@@ -211,11 +220,6 @@ class ApplicationController extends CI_Controller
 
 		$data = json_decode($result, true);
 
-		// echo '<pre>';
-		// print_r($data);
-		// echo '</pre>';
-		// die;
-
 		// end nv logs
 		$log['user_id'] = $user_id;
 		$log['request'] = json_encode($customer_data);
@@ -243,46 +247,9 @@ class ApplicationController extends CI_Controller
 
 
 		if (in_array($data['status'], ['COMPLETE'])) {
-
-			if ($this->input->post('household')) {
-				$household = $this->input->post('household');
-
-				if ($this->input->post('signature_one_done') == 1) {
-					$image = $this->input->post('signature_one');
-					$image = str_replace('data:image/png;base64,', '', $image);
-					$image = str_replace(' ', '+', $image);
-					$filedata = base64_decode($image);
-					$file = uniqid(rand(), true) . '.png';
-					$success = file_put_contents('uploads/signature/' . $file, $filedata);
-
-					$household['image'][0] = $file;
-				} else {
-					unset($household['date'][0]);
-				}
-
-				if ($this->input->post('signature_two_done') == 1) {
-					$image = $this->input->post('signature_one');
-					$image = str_replace('data:image/png;base64,', '', $image);
-					$image = str_replace(' ', '+', $image);
-					$filedata = base64_decode($image);
-					$file = uniqid(rand(), true) . '.png';
-					$success = file_put_contents('uploads/signature/' . $file, $filedata);
-					$household['image'][1] = $file;
-				} else {
-					unset($household['date'][1]);
-				}
-
-				if ($this->input->post('signature_one_done') == 0 && $this->input->post('signature_two_done') == 0) {
-					unset($household['date']);
-				}
-
-				$this->session->set_tempdata('household', json_encode($household), 300 * 2);
-			}
-
-
 			$this->session->set_tempdata('application_apply', ['user_id' => $user_id, 'plan_id' => $plan_id], 300 * 2);
 			$this->session->set_tempdata('nv_success', $data, 300 * 2);
-			redirect('application/confirm/' . $plan_id);
+			redirect('application/lifeline_program/' . $plan_id);
 		}
 
 		return redirect('application/eligibility_check/' . $plan_id);
@@ -311,6 +278,211 @@ class ApplicationController extends CI_Controller
 	}
 
 
+	public function application_lifeline_program($plan_id)
+	{
+		$this->login_check();
+		$this->role_block([4]);
+
+		$user_id = $this->session->userdata('user_id');
+
+		if (!$this->session->tempdata('application_apply')) {
+			redirect('/');
+		}
+
+		$application_apply_session = $this->session->tempdata('application_apply');
+		if ($application_apply_session['user_id'] != $user_id && $application_apply_session['plan_id'] != $plan_id) {
+			redirect('/');
+		}
+
+		$data = $this->common_data();
+		$data['plan_id'] = $plan_id;
+		$data['nv_success'] = $this->session->tempdata('nv_success');
+		$data['plan'] = $this->db->get_where('plans', ['plan_id' => $plan_id])->row();
+		$data['consumer'] = $this->user->get_consumer_by_id($user_id);
+		$data['lifeline_programs'] = $this->db->get('lifeline_programs')->result();
+		$data['lifeline_agreements'] = $this->db->get('lifeline_agreement')->result();
+
+
+		$this->load->view('application_lifeline_program', $data);
+	}
+
+	public function application_lifeline_action($plan_id)
+	{
+		$this->login_check();
+		$this->role_block([4]);
+
+		$user_id = $this->session->userdata('user_id');
+
+		if (!$this->session->tempdata('application_apply')) {
+			redirect('/');
+		}
+
+		$application_apply_session = $this->session->tempdata('application_apply');
+		if ($application_apply_session['user_id'] != $user_id && $application_apply_session['plan_id'] != $plan_id) {
+			redirect('/');
+		}
+
+		$data = $this->common_data();
+
+		$data['lifeline'] = $this->input->post('lifeline');
+		$data['plan_id'] = $plan_id;
+		$data['lifeline_programs'] = $this->db->get('lifeline_programs')->result();
+		$data['lifeline_agreements'] = $this->db->get('lifeline_agreement')->result();
+		$data['consumer'] = $this->user->get_consumer_by_id($user_id);
+
+		// return $this->load->view('application_lifeline_program_pdf', $data);
+		$html = $this->load->view('application_lifeline_program_pdf', $data, true);
+
+
+		// instantiate and use the dompdf class
+		$dompdf = new Dompdf();
+		$dompdf->loadHtml($html);
+
+		// (Optional) Setup the paper size and orientation
+		$dompdf->setPaper('A4', 'portrait');
+
+		// Render the HTML as PDF
+		$dompdf->render();
+		
+
+		// Output the generated PDF to Browser
+		$pdf = $dompdf->output();
+
+		$filename = uniqid().'.pdf';
+
+		if(file_put_contents("./uploads/lifeline_pdf/".$filename, $pdf)){
+			$this->session->set_tempdata('lifeline_certificate', $filename, 300 * 2);
+		} else {
+			$this->session->set_flashdata('error', 'something went wrong please try again');
+			redirect('application/eligibility_check/'.$plan_id);
+		}
+
+
+		if (in_array($data['consumer']->state_id, [6, 43, 51, 53])) {
+			redirect('application/confirm/' . $plan_id);
+		}
+
+		redirect('application/household/' . $plan_id);
+
+	}
+
+	public function application_household($plan_id)
+	{
+
+		$this->login_check();
+		$this->role_block([4]);
+
+		$user_id = $this->session->userdata('user_id');
+
+		if (!$this->session->tempdata('application_apply')) {
+			redirect('/');
+		}
+
+		$application_apply_session = $this->session->tempdata('application_apply');
+		if ($application_apply_session['user_id'] != $user_id && $application_apply_session['plan_id'] != $plan_id) {
+			redirect('/');
+		}
+		
+
+		$data = $this->common_data();
+		$data['plan_id'] = $plan_id;
+		$data['consumer'] = $this->user->get_consumer_by_id($user_id);
+		
+		$this->load->view('application_household', $data);
+		
+	}
+
+	public function application_household_action($plan_id){
+		$this->login_check();
+		$this->role_block([4]);
+
+		$user_id = $this->session->userdata('user_id');
+
+		if (!$this->session->tempdata('application_apply')) {
+			redirect('/');
+		}
+
+		$application_apply_session = $this->session->tempdata('application_apply');
+		if ($application_apply_session['user_id'] != $user_id && $application_apply_session['plan_id'] != $plan_id) {
+			redirect('/');
+		}
+
+		if ($this->input->post('household')) {
+			$household = $this->input->post('household');
+
+			if ($this->input->post('signature_one_done') == 1) {
+				$image = $this->input->post('signature_one');
+				$image = str_replace('data:image/png;base64,', '', $image);
+				$image = str_replace(' ', '+', $image);
+				$filedata = base64_decode($image);
+				$file = uniqid(rand(), true) . '.png';
+				$success = file_put_contents('uploads/signature/' . $file, $filedata);
+
+				$household['image'][0] = $file;
+			} 
+
+			if ($this->input->post('signature_two_done') == 1) {
+				$image = $this->input->post('signature_two');
+				$image = str_replace('data:image/png;base64,', '', $image);
+				$image = str_replace(' ', '+', $image);
+				$filedata = base64_decode($image);
+				$file = uniqid(rand(), true) . '.png';
+				$success = file_put_contents('uploads/signature/' . $file, $filedata);
+				$household['image'][1] = $file;
+			} 
+		
+
+			if(!isset($household['question_two'])){
+				$household['question_two'] = null;
+			}
+
+			if(!isset($household['question_three'])){
+				$household['question_three'] = null;
+			}
+
+			if ($this->input->post('signature_one_done') == 0 && $this->input->post('signature_two_done') == 0) {
+				unset($household['date']);
+			}
+
+			$this->session->set_tempdata('household', json_encode($household), 300 * 2);
+		}
+
+		$data['household'] = json_decode($this->session->tempdata('household'));
+
+
+		// return $this->load->view('application_household_pdf', $data);
+
+		$html = $this->load->view('application_household_pdf', $data, true);
+
+		
+		// instantiate and use the dompdf class
+		$dompdf = new Dompdf();
+		$dompdf->loadHtml($html);
+
+		// (Optional) Setup the paper size and orientation
+		$dompdf->setPaper('A4', 'portrait');
+
+		// Render the HTML as PDF
+		$dompdf->render();
+
+		// $dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
+
+		// Output the generated PDF to Browser
+		$pdf = $dompdf->output();
+
+		$filename = uniqid().'.pdf';
+
+		if(file_put_contents("./uploads/household_worksheet/".$filename, $pdf)){
+			$this->session->set_tempdata('household_worksheet', $filename, 300 * 2);
+		} else {
+			$this->session->set_flashdata('error', 'something went wrong please try again');
+			redirect('application/household/'.$plan_id);
+		}
+
+		redirect('application/confirm/' . $plan_id);
+
+	}
+
 	public function application_confirm($plan_id)
 	{
 		$this->login_check();
@@ -331,6 +503,8 @@ class ApplicationController extends CI_Controller
 		$data['plan_id'] = $plan_id;
 		$data['nv_success'] = $this->session->tempdata('nv_success');
 		$data['plan'] = $this->db->get_where('plans', ['plan_id' => $plan_id])->row();
+		$data['is_lifeline'] = $data['plan']->lifeline_service == 1 ? true : false;
+		
 
 		$this->load->view('application_confirm', $data);
 	}
@@ -361,18 +535,17 @@ class ApplicationController extends CI_Controller
 
 		//nv response
 		$application['nv_response'] = $this->input->post('nv_response') ? $this->input->post('nv_response') : NULL;
+		$application['is_nv_enable'] = $this->input->post('nv_response') ? 1 : 0;
 
 
 		// file upload 
 		$application['proof_of_eligibility'] = $this->lifeline_file_upload('proof_of_eligibility');
 		$application['photo_id'] = $this->lifeline_file_upload('photo_id');
-		$application['lifeline_certification'] = $this->lifeline_file_upload('lifeline_certification');
-		$application['household_worksheet'] = $this->lifeline_file_upload('household_worksheet');
-
-		// file upload 
-		// print_r($application);
-		// die;
+		$application['lifeline_certification'] = $this->session->tempdata('lifeline_certificate');
+		$application['household_worksheet'] = $this->session->tempdata('household_worksheet');
 		$application['household'] = $this->session->tempdata('household');
+
+
 		$this->db->insert('applications', $application);
 
 		$application_id = $this->db->insert_id();

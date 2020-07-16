@@ -96,7 +96,9 @@ $route['nv/check/(:num)'] = 'NladController/nv_check/$1';
 //aplication
 $route['application/eligibility_check/(:num)'] = 'ApplicationController/profile_eligibilty_check/$1';
 $route['application/eligibility_check/without_nv/(:num)'] = 'ApplicationController/without_nv_check/$1';
+$route['application/lifeline_program/(:num)'] = 'ApplicationController/application_lifeline_program/$1';
 $route['application/confirm/(:num)'] = 'ApplicationController/application_confirm/$1';
+$route['application/household/(:num)'] = 'ApplicationController/application_household/$1';
 $route['application/success'] = 'ApplicationController/application_success';
 $route['carrier/application/details/(:any)'] = 'AdminViewListController/application_details/$1';
 $route['consumer/applications'] = 'ApplicationController/consumer_applications_lists';

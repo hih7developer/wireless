@@ -3556,3 +3556,13 @@ input.select2-search__field {
 .dashboard-tab-innr .value-list ul li {
     font-size: 15px;
 }
+
+.application-breadcrumb{
+	margin-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+.application-breadcrumb .breadcrumb-item.active a{
+	color: #6c757d;
+ 
+}

@@ -127,6 +127,8 @@
                             </div>
                         </div>
 
+						<?php if ($application['is_nv_enable'] == 1) : ?>
+
                         <?php
 
                         $nv_success = json_decode($application['nv_response']);
@@ -161,6 +163,8 @@
                                 </div>
                             </div>
                         </div>
+
+						<?php endif ?>
 
 
 
@@ -228,6 +232,9 @@
                         </div>
 
                     </div>
+
+					<?php if ($application['is_nv_enable'] == 1) : ?>
+
                     <div class="passchange_sec">
 
                         <div class="cmmn_title">
@@ -241,10 +248,10 @@
                                     <a data-fancybox
                                         <?php if (pathinfo($application['lifeline_certification'], PATHINFO_EXTENSION) == 'pdf') : ?>
                                         data-type="iframe" <?php endif; ?>
-                                        data-src="<?php echo base_url('uploads/lifeline/' . $application['lifeline_certification'] . "#toolbar=0") ?>"
+                                        data-src="<?php echo base_url('uploads/lifeline_pdf/' . $application['lifeline_certification'] . "#toolbar=0") ?>"
                                         href="javascript:;" class="btn" disabled><i class="fa fa-eye"></i></em> View</a>
                                     <a target="_blank" download
-                                        href="<?php echo base_url('uploads/lifeline/' . $application['lifeline_certification']) ?>"
+                                        href="<?php echo base_url('uploads/lifeline_pdf/' . $application['lifeline_certification']) ?>"
                                         class="btn <?php echo $application['status'] == 'approved' ? '' : 'disabled' ?>"><i
                                             class="fa fa-download" aria-hidden="true"></i> Download</a>
                                 </div>
@@ -252,7 +259,6 @@
                         </div>
 
 
-                        <?php if ($application['is_nv_enable'] == 0) : ?>
 
                         <div class="col-md-12 text-center">
                             <div class="form-group">
@@ -293,17 +299,16 @@
                                     <a data-fancybox
                                         <?php if (pathinfo($application['household_worksheet'], PATHINFO_EXTENSION) == 'pdf') : ?>
                                         data-type="iframe" <?php endif; ?>
-                                        data-src="<?php echo base_url('uploads/lifeline/' . $application['household_worksheet'] . "#toolbar=0") ?>"
+                                        data-src="<?php echo base_url('uploads/household_worksheet/' . $application['household_worksheet'] . "#toolbar=0") ?>"
                                         href="javascript:;" class="btn" disabled><i class="fa fa-eye"></i></em> View</a>
                                     <a target="_blank" download
-                                        href="<?php echo base_url('uploads/lifeline/' . $application['household_worksheet']) ?>"
+                                        href="<?php echo base_url('uploads/household_worksheet/' . $application['household_worksheet']) ?>"
                                         class="btn <?php echo $application['status'] == 'approved' ? '' : 'disabled' ?>"><i
                                             class="fa fa-download" aria-hidden="true"></i> Download</a>
                                 </div>
                             </div>
                         </div>
 
-                        <?php endif; ?>
 
                         <?php if ($application['status'] == 'approved') : ?>
                         <div class="cmmn_title">
@@ -333,6 +338,9 @@
                         </div>
                         <?php endif; ?>
                     </div>
+
+					<?php endif; ?>
+
 
                 </div>
 
