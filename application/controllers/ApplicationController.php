@@ -93,9 +93,20 @@ class ApplicationController extends CI_Controller
 		$data = $this->common_data();
 		$data['plan_id'] = $plan_id;
 		$data['consumer'] = $this->user->get_consumer_by_id($data['user']->user_id);
-		// $data['consumerID'] = $this->user->get_user_by_id($data['user']->user_id);
-		// $data['carrier_admin'] = $this->user->get_carrier_admin_by_id($user_id);
 		$data['service_provider_state'] = $this->plan->get_service_provider_states();
+
+
+		
+		//check if any pending application with same seller
+		$seller_id = $this->db->get_where('plans', ['plan_id' => $plan_id])->row()->user_id;
+		$seller_plans = $this->db->get_where('plans', ['user_id' => $seller_id])->result();
+		$pending_applications = $this->db->where_in('plan_id', array_column($seller_plans, 'plan_id'))->where('status', 'pending')->get('applications')->num_rows();
+		if($pending_applications > 0){
+			$this->session->set_flashdata('error', "There is already an application applied and pending for review, please wait or contact administration");
+			redirect('plans/search/' . $data['consumer']->state_id);
+		}
+
+		//check if any pending application with same seller
 
 		$data['nv_check'] = in_array($data['consumer']->state_id, [6, 43, 51, 53]) ? false : true;
 
