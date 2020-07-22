@@ -1321,7 +1321,15 @@
 
     .container-fluid {
         width: 100%;
-    }
+	}
+	
+	.pdng35 {
+		display: flex;
+		flex-flow: column;
+	}
+	.pdng35 .btn {
+		margin-bottom: 10px;
+	}
 
 }
 

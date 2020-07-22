@@ -487,11 +487,11 @@
                     </div>
                 </div>
                 <div class="pdng35 text-center">
-                    <button type="submit" class="btn btn-default formbtn" form="consumer_profile_form">Submit</button>
+                    <button type="submit" class="btn btn-default formbtn" form="consumer_profile_form">Update</button>
                     <a href="<?php echo base_url('nv/check/'.$user->user_id) ?>"
-                        class="btn btn-default formbtn nv_check_btn">NV Check</a>
+                        class="btn btn-default formbtn nv_check_btn">Check Eligibility</a>
                     <a href="<?php echo base_url('nlad/check/'.$user->user_id) ?>"
-                        class="btn btn-default formbtn nlad_check_btn">Nlad Check</a>
+                        class="btn btn-default formbtn nlad_check_btn">Verify My Info</a>
                     <input type="hidden" name="profile_field_touched" value="0">
                 </div>
             </div>

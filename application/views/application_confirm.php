@@ -19,7 +19,7 @@
 			</nav>
 			<div class="capa-outr">
 				<div class="planinf">
-					<div class="plasec_one">Application Summery</div>
+					<div class="plasec_one">Application Summary</div>
 				</div>
 				<div class="profile_info_sec">
 					<div class="personalinfo_sec w-100 cmmn_title">

@@ -1,5 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once('./vendor/autoload.php');
+
+
+use Dompdf\Dompdf;
 
 class Welcome extends CI_Controller {
 
@@ -20,6 +24,23 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		// $this->load->view('welcome_message');
+
+		$data = [];
+
+		// return $this->load->view('pdf', $data);
+		$html = $this->load->view('pdf', $data, true);
+
+
+		// instantiate and use the dompdf class
+		$dompdf = new Dompdf();
+		$dompdf->loadHtml($html);
+
+		// (Optional) Setup the paper size and orientation
+		$dompdf->setPaper('A4', 'portrait');
+		// Render the HTML as PDF
+		$dompdf->render();
+		$dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
+
 	}
 }

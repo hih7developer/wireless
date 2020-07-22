@@ -176,7 +176,10 @@ function agreementValidity() {
 
 <script>
 $(document).on('click', '.checklabel', function() {
-    var checkbox = $(this).prev();
+	var checkbox = $(this).prev();
+	$('.gov_program').prop('checked', false);
+	$('.income_program').prop('checked', false);
+	
     checkbox.prop('checked', !checkbox.prop('checked'));
 
     if (checkbox.hasClass('income_program')) {
@@ -200,7 +203,8 @@ $(document).on('click', '.checklabel', function() {
             $('.income_otr').hide();
             $('.income_otr #income').removeAttr('required');
         }
-    } else {
+	} 
+	else {
         $('.income_program').prop('checked', false);
         $('.income_otr').hide();
         $('.income_otr #income').removeAttr('required');

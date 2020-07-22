@@ -269,7 +269,10 @@ class Plan extends CI_Model
                 break;
 
             default:
-                $percentage = ($data * 90) / $max;
+				if(strtolower($max) == 'unlimited')
+					$percentage = ($data * 90) / 100;
+				else
+					$percentage = ($data * 90) / $max;
                 break;
         }
 
