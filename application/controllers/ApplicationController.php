@@ -530,7 +530,6 @@ class ApplicationController extends CI_Controller
 
 		$data = $this->common_data();
 		$plan = $this->db->get_where('plans', ['plan_id' => $plan_id])->row();
-		$applications = $this->db->get_where('applications', ['user_id' => $user_id])->row();
 		$application['plan_id'] = $plan_id;
 		$application['user_id'] = $user_id;
 
@@ -556,20 +555,35 @@ class ApplicationController extends CI_Controller
 		//---------------------- New Application submit Email-----------------------------------
 
 
-		$mail['email'] = $this->db->get_where('users', ['user_id' => $plan->user_id])->row()->email;
-		// $mail['email'] = 'sutanubose.2011@gmail.com';
+		// $mail['email'] = $this->db->get_where('users', ['user_id' => $plan->user_id])->row()->email;
+		$mail['email'] = 'sjgalaxy98@gmail.com';
 		$mail['template_id'] = 14214394;
 		$mail['details'] = [
 			"carrier_name" =>  $this->db->get_where('users', ['user_id' => $plan->user_id])->row()->name,
-			"account_id" => $this->db->get_where('applications', ['user_id' => $user_id])->row()->application_id,
-			"order_timestamp" => $this->db->get_where('applications', ['user_id' => $user_id])->row()->created_at,
+			"application_id" => $application_id,
+			"order_timestamp" => $this->db->get_where('applications', ['application_id' => $application_id])->row()->created_at,
 			"plan_name" => $this->db->get_where('plans', ['user_id' => $plan->user_id])->row()->name,
+			"application_url" => base_url('carrier/application/details/'.$application_id),
 		];
 
 		$this->postmark($mail);
 
 
-		// $this->send_email($email_details);
+		
+		// $mail['email'] = $this->db->get_where('users', ['user_id' => $user_id])->row()->email;
+		$mail['email'] = 'sjgalaxy98@gmail.com';
+		$mail['template_id'] = 14192860;
+		$mail['details'] = [
+			"first_name" =>  $this->db->get_where('users', ['user_id' => $plan->user_id])->row()->name,
+			"company" =>  $this->db->get_where('service_providers', ['user_id' => $plan->user_id])->row()->name,
+			"contact_phone" =>  $this->db->get_where('service_providers', ['user_id' => $plan->user_id])->row()->contact_no,
+			"application_id" => $application_id,
+			"application_url" => base_url('consumer/application/details/'.$application_id),
+		];
+
+		$this->postmark($mail);
+
+
 
 		redirect('application/success');
 	}
