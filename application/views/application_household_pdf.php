@@ -26,11 +26,6 @@
         font-family: Arial, Helvetica, sans-serif;
     }
 
-    body {
-        /* margin-left: 2em;
-        margin-right: 2em; */
-    }
-
     .page {
         height: 947px;
         /* padding-top: 5px; */
