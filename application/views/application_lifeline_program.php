@@ -127,7 +127,6 @@
 <script>
 function programValidity() {
     var fields = $("input[name='lifeline[program][]']").serializeArray();
-	alert(fields.length);
     if (fields.length === 0) {
         $('.lifeline_program_invalid').show();
         return false;

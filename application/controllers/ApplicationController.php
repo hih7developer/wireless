@@ -143,7 +143,7 @@ class ApplicationController extends CI_Controller
 		//end        
 
 		$is_lifeline = $this->db->get_where('plans', ['plan_id' => $plan_id])->row()->lifeline_service == 1 ? true : false;
-		if(!$is_lifeline){
+		if (!$is_lifeline) {
 			$this->session->set_tempdata('application_apply', ['user_id' => $user_id, 'plan_id' => $plan_id], 300 * 2);
 			redirect('application/confirm/' . $plan_id);
 		}
@@ -343,27 +343,27 @@ class ApplicationController extends CI_Controller
 
 		// Render the HTML as PDF
 		$dompdf->render();
-		
+
 
 		// Output the generated PDF to Browser
 		$pdf = $dompdf->output();
 
-		$filename = uniqid().'.pdf';
+		$filename = uniqid() . '.pdf';
 
-		if(file_put_contents("./uploads/lifeline_pdf/".$filename, $pdf)){
+		if (file_put_contents("./uploads/lifeline_pdf/" . $filename, $pdf)) {
 			$this->session->set_tempdata('lifeline_certificate', $filename, 300 * 2);
 		} else {
 			$this->session->set_flashdata('error', 'something went wrong please try again');
-			redirect('application/eligibility_check/'.$plan_id);
+			redirect('application/eligibility_check/' . $plan_id);
 		}
 
 
-		if (in_array($data['consumer']->state_id, [6, 43, 51, 53])) {
+		//state check where nv is enable
+		if (!in_array($data['consumer']->state_id, [6, 43, 51, 53])) {
 			redirect('application/confirm/' . $plan_id);
 		}
 
 		redirect('application/household/' . $plan_id);
-
 	}
 
 	public function application_household($plan_id)
@@ -382,17 +382,17 @@ class ApplicationController extends CI_Controller
 		if ($application_apply_session['user_id'] != $user_id && $application_apply_session['plan_id'] != $plan_id) {
 			redirect('/');
 		}
-		
+
 
 		$data = $this->common_data();
 		$data['plan_id'] = $plan_id;
 		$data['consumer'] = $this->user->get_consumer_by_id($user_id);
-		
+
 		$this->load->view('application_household', $data);
-		
 	}
 
-	public function application_household_action($plan_id){
+	public function application_household_action($plan_id)
+	{
 		$this->login_check();
 		$this->role_block([4]);
 
@@ -419,7 +419,7 @@ class ApplicationController extends CI_Controller
 				$success = file_put_contents('uploads/signature/' . $file, $filedata);
 
 				$household['image'][0] = $file;
-			} 
+			}
 
 			if ($this->input->post('signature_two_done') == 1) {
 				$image = $this->input->post('signature_two');
@@ -429,14 +429,14 @@ class ApplicationController extends CI_Controller
 				$file = uniqid(rand(), true) . '.png';
 				$success = file_put_contents('uploads/signature/' . $file, $filedata);
 				$household['image'][1] = $file;
-			} 
-		
+			}
 
-			if(!isset($household['question_two'])){
+
+			if (!isset($household['question_two'])) {
 				$household['question_two'] = null;
 			}
 
-			if(!isset($household['question_three'])){
+			if (!isset($household['question_three'])) {
 				$household['question_three'] = null;
 			}
 
@@ -454,7 +454,7 @@ class ApplicationController extends CI_Controller
 
 		$html = $this->load->view('application_household_pdf', $data, true);
 
-		
+
 		// instantiate and use the dompdf class
 		$dompdf = new Dompdf();
 		$dompdf->loadHtml($html);
@@ -470,17 +470,16 @@ class ApplicationController extends CI_Controller
 		// Output the generated PDF to Browser
 		$pdf = $dompdf->output();
 
-		$filename = uniqid().'.pdf';
+		$filename = uniqid() . '.pdf';
 
-		if(file_put_contents("./uploads/household_worksheet/".$filename, $pdf)){
+		if (file_put_contents("./uploads/household_worksheet/" . $filename, $pdf)) {
 			$this->session->set_tempdata('household_worksheet', $filename, 300 * 2);
 		} else {
 			$this->session->set_flashdata('error', 'something went wrong please try again');
-			redirect('application/household/'.$plan_id);
+			redirect('application/household/' . $plan_id);
 		}
 
 		redirect('application/confirm/' . $plan_id);
-
 	}
 
 	public function application_confirm($plan_id)
@@ -500,11 +499,13 @@ class ApplicationController extends CI_Controller
 		}
 
 		$data = $this->common_data();
+		$data['consumer'] = $this->user->get_consumer_by_id($user_id);
 		$data['plan_id'] = $plan_id;
 		$data['nv_success'] = $this->session->tempdata('nv_success');
 		$data['plan'] = $this->db->get_where('plans', ['plan_id' => $plan_id])->row();
 		$data['is_lifeline'] = $data['plan']->lifeline_service == 1 ? true : false;
-		
+		$data['in_nv_enable'] = !in_array($data['consumer']->state_id, [6, 43, 51, 53]);
+
 
 		$this->load->view('application_confirm', $data);
 	}
