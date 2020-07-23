@@ -226,19 +226,19 @@ p {
 
 
 .img_hdr {
-	float: right;
+	/* float: right; */
 }
 .img_hdr_innr {
-	width: 230px;
+	width: auto;
 }
-.hdr {
+/*.hdr {
 	border-bottom: 1px solid #979090;
 	padding-bottom: 5px;
-}
+}*/
 
-.mid{
+/*.mid{
     padding-top: 10px;
-}
+}*/
 .heading h1 {
 	font-size: 25px;
 	line-height: 30px;
@@ -284,18 +284,17 @@ p {
 	display: flex;
 }
 
-.ftr {
+/*.ftr {
 	border-top: 1px solid #979090;
 	padding-top: 5px;
-}
+}*/
 
-.ftr{
+/*.ftr{
     display: flex;
-}
+}*/
 .ftr p{
     font-size: 9px;
     color: #009ad9;
-    width: 30%;
     line-height: 1;
 }
 .ftr h6,.ftr h6 a{
@@ -305,9 +304,9 @@ p {
     text-align: right;
     transition: all 0.4s;
 }
-.rgtt_ftrr{
+/*.rgtt_ftrr{
     width: 70%;
-}
+}*/
 .rgtt_ftrr h6:first-child a{
     color: #009ad9;
 }
