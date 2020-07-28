@@ -324,14 +324,14 @@ class ApplicationController extends CI_Controller
 
 		$user_id = $this->session->userdata('user_id');
 
-		if (!$this->session->tempdata('application_apply')) {
-			redirect('/');
-		}
+		// if (!$this->session->tempdata('application_apply')) {
+		// 	redirect('/');
+		// }
 
-		$application_apply_session = $this->session->tempdata('application_apply');
-		if ($application_apply_session['user_id'] != $user_id && $application_apply_session['plan_id'] != $plan_id) {
-			redirect('/');
-		}
+		// $application_apply_session = $this->session->tempdata('application_apply');
+		// if ($application_apply_session['user_id'] != $user_id && $application_apply_session['plan_id'] != $plan_id) {
+		// 	redirect('/');
+		// }
 
 		$data = $this->common_data();
 
@@ -357,7 +357,9 @@ class ApplicationController extends CI_Controller
 
 
 		// Output the generated PDF to Browser
-		$pdf = $dompdf->output();
+		// $pdf = $dompdf->output();
+		$dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
+
 
 		$filename = uniqid() . '.pdf';
 

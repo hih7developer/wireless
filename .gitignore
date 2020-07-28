@@ -4,13 +4,13 @@ application/config/config.php
 
 application/config/database.php
 
-application/upload/lifeline/*
+application/uploads/lifeline/*
 
-application/upload/lifeline_pdf/*
+application/uploads/lifeline_pdf/
 
-application/upload/signature/*
+application/uploads/signature/*
 
-application/upload/household_worksheet/*
+application/uploads/household_worksheet/*
 
 application/cache/*
 !application/cache/index.html
