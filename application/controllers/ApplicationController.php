@@ -204,7 +204,7 @@ class ApplicationController extends CI_Controller
 			"contactUrbCode" => "",
 			"repId" => Null,
 			"repNotAssisted" => 1,
-			// "carrierUrl" => "https://app.wirelessmatchup.com"
+			"carrierUrl" => "https://wirelessmatchup.com"
 		);
 
 		$data_string = json_encode($customer_data);
