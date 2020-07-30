@@ -62,7 +62,7 @@
 
         <h2>Qualify for Lifeline</h2>
 
-        <?php foreach($lifeline_programs as $key): ?>
+        <?php foreach ($lifeline_programs as $key) : ?>
         <div>
             <input name="lifeline[program][]" type="checkbox" value="<?php echo $key->lifeline_program_id ?>"
                 <?php echo in_array($key->lifeline_program_id, $lifeline['program']) ? 'checked' : '' ?>>
@@ -70,7 +70,7 @@
         </div>
         <?php endforeach; ?>
 
-        <?php if(in_array(6, $lifeline['program'])): ?>
+        <?php if (in_array(6, $lifeline['program'])) : ?>
         <h3 style="margin-top:5px">Income based eligibilty with</h3>
         <p><?php echo $lifeline['income'] ?></p>
         <?php endif; ?>
@@ -78,7 +78,7 @@
 
         <h2>Agreement</h2>
 
-        <?php foreach($lifeline_agreements as $key): ?>
+        <?php foreach ($lifeline_agreements as $key) : ?>
         <div>
             <input type="checkbox" name="lifeline[agreement][]" value="<?php echo $key->lifeline_agreement_id ?>"
                 <?php echo in_array($key->lifeline_agreement_id, $lifeline['agreement']) ? 'checked' : '' ?>>
@@ -138,51 +138,57 @@
     input[type="text"] {
         letter-spacing: 3px;
     }
-	input[type="checkbox"] {
+
+    input[type="checkbox"] {
         display: inline !important;
     }
-	.page5 .chk_bx label{
-		font-size: 12px;
-		font-weight: normal;
-	}
-	.page6 .chk_bx label{
-		font-size: 12px;
-		font-weight: normal;
-	}
-	.page6 ol {
-		margin-left: 50px;
-		list-style-type: decimal;
-	}
-	.page6 ol li:first-child{
-		margin-top: 5px;
-		margin-bottom: 5px;
-	}
+
+    .page5 .chk_bx label {
+        font-size: 12px;
+        font-weight: normal;
+    }
+
+    .page6 .chk_bx label {
+        font-size: 12px;
+        font-weight: normal;
+    }
+
+    .page6 ol {
+        margin-left: 50px;
+        list-style-type: decimal;
+    }
+
+    .page6 ol li:first-child {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
     </style>
-    <?php 
-		function split_name($name) {
-			$parts = array();
-		
-			while ( strlen( trim($name)) > 0 ) {
-				$name = trim($name);
-				$string = preg_replace('#.*\s([\w-]*)$#', '$1', $name);
-				$parts[] = $string;
-				$name = trim( preg_replace('#'.$string.'#', '', $name ) );
-			}
-		
-			if (empty($parts)) {
-				return false;
-			}
-		
-			$parts = array_reverse($parts);
-			$name = array();
-			$name['first_name'] = $parts[0];
-			$name['middle_name'] = (isset($parts[2])) ? $parts[1] : '';
-			$name['last_name'] = (isset($parts[2])) ? $parts[2] : ( isset($parts[1]) ? $parts[1] : '');
-		
-			return $name;
-		} 
-	 
-		?>
+    <?php
+	function split_name($name)
+	{
+		$parts = array();
+
+		while (strlen(trim($name)) > 0) {
+			$name = trim($name);
+			$string = preg_replace('#.*\s([\w-]*)$#', '$1', $name);
+			$parts[] = $string;
+			$name = trim(preg_replace('#' . $string . '#', '', $name));
+		}
+
+		if (empty($parts)) {
+			return false;
+		}
+
+		$parts = array_reverse($parts);
+		$name = array();
+		$name['first_name'] = $parts[0];
+		$name['middle_name'] = (isset($parts[2])) ? $parts[1] : '';
+		$name['last_name'] = (isset($parts[2])) ? $parts[2] : (isset($parts[1]) ? $parts[1] : '');
+
+		return $name;
+	}
+
+	?>
 </head>
 
 <body>
@@ -210,8 +216,8 @@
                                                 <h6 class="mar_btn_10">OMB APPROVAL EDITION 3060-0819</h6>
                                                 <div class="img_hdr">
                                                     <div class="img_hdr_innr">
-                                                        <img style="max-width: auto;"
-                                                            src="<?php echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; ?>" />
+                                                        <img style="max-width: auto;" src="<?php //echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; 
+																							?>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -411,8 +417,8 @@
                                                 <h6 class="mar_btn_10">OMB APPROVAL EDITION 3060-0819</h6>
                                                 <div class="img_hdr">
                                                     <div class="img_hdr_innr">
-                                                        <img style="max-width: auto;"
-                                                            src="<?php echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; ?>" />
+                                                        <img style="max-width: auto;" src="<?php //echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; 
+																							?>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -539,19 +545,23 @@
                                                     </div>
                                                     <div class="inputt mar_top_5 mar_btn_5">
                                                         <div class="chk_bx">
-                                                            <input type="checkbox" id="email" name="email"
-                                                                value="email" <?php echo $consumer->how_to_reach == 'email' ? 'checked' : '' ?>><span class="Hide_small">H1</span><label
+                                                            <input type="checkbox" id="email" name="email" value="email"
+                                                                <?php echo $consumer->how_to_reach == 'email' ? 'checked' : '' ?>><span
+                                                                class="Hide_small">H1</span><label
                                                                 for="email">Email</label><span
                                                                 class="Hide_big">Hide_big</span><input type="checkbox"
-                                                                id="phone" name="phone" value="phone" <?php echo $consumer->how_to_reach == 'phone' ? 'checked' : '' ?>><span
+                                                                id="phone" name="phone" value="phone"
+                                                                <?php echo $consumer->how_to_reach == 'phone' ? 'checked' : '' ?>><span
                                                                 class="Hide_small">H1</span><label
                                                                 for="phone">Phone</label><span
                                                                 class="Hide_big">Hide_big</span><input type="checkbox"
-                                                                id="text message" name="text message" value="Msg"  <?php echo $consumer->how_to_reach == 'message' ? 'checked' : '' ?>><span
+                                                                id="text message" name="text message" value="Msg"
+                                                                <?php echo $consumer->how_to_reach == 'message' ? 'checked' : '' ?>><span
                                                                 class="Hide_small">H1</span><label
                                                                 for="text message">Text Message</label><span
                                                                 class="Hide_big">Hide_big</span><input type="checkbox"
-                                                                id="mail " name="mail " value="mail" <?php echo $consumer->how_to_reach == 'mail' ? 'checked' : '' ?>><span
+                                                                id="mail " name="mail " value="mail"
+                                                                <?php echo $consumer->how_to_reach == 'mail' ? 'checked' : '' ?>><span
                                                                 class="Hide_small">H1</span><label
                                                                 for="mail ">Mail</label>
                                                         </div>
@@ -622,8 +632,8 @@
                                                 <h6 class="mar_btn_10">OMB APPROVAL EDITION 3060-0819</h6>
                                                 <div class="img_hdr">
                                                     <div class="img_hdr_innr">
-                                                        <img style="max-width: auto;"
-                                                            src="<?php echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; ?>" />
+                                                        <img style="max-width: auto;" src="<?php //echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; 
+																							?>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -651,8 +661,8 @@
                                                         Lifeline rules.</h3>
                                                 </div>
                                             </div>
-										</td>
-										<?php 
+                                        </td>
+                                        <?php
 										if ($consumer->shipping_address_set == 1) {
 											$shipping_address = $consumer->shipping_address;
 											$shipping_apt_room = $consumer->shipping_apt_room;
@@ -660,7 +670,7 @@
 											$shipping_state_id = $consumer->shipping_state_id;
 											$shipping_zip = $consumer->shipping_zip;
 										}
-										
+
 										?>
                                         <td
                                             style="margin: 0;padding:0;padding-top:20px;width: 75%;vertical-align: top;">
@@ -671,7 +681,7 @@
                                                             get service. Do not use a P.O. Box</p>
                                                     </div>
                                                     <div class="inputt mar_top_5 mar_btn_5">
-                                                        <input type="text"  value="<?php echo $consumer->address ?>" />
+                                                        <input type="text" value="<?php echo $consumer->address ?>" />
                                                         <span>Street Number and Nam</span>
                                                     </div>
                                                     <table width="100%" cellpadding="0" cellspacing="0" align=""
@@ -680,14 +690,16 @@
                                                             <td
                                                                 style="margin: 0;padding: 0;vertical-align: top;padding-right: 10px;">
                                                                 <div class="inputt mar_btn_5">
-                                                                    <input type="text" value="<?php echo $consumer->apt_room ?>"/>
+                                                                    <input type="text"
+                                                                        value="<?php echo $consumer->apt_room ?>" />
                                                                     <SPAN>Apt,Unit Etc.</SPAN>
                                                                 </div>
                                                             </td>
                                                             <td
                                                                 style="margin: 0;padding: 0;vertical-align: top;padding-left: 10px;">
                                                                 <div class="inputt mar_btn_5">
-																	<input type="text" value="<?php echo $consumer->city ?>"/>
+                                                                    <input type="text"
+                                                                        value="<?php echo $consumer->city ?>" />
                                                                     <SPAN>City</SPAN>
                                                                 </div>
                                                             </td>
@@ -696,17 +708,18 @@
                                                             <td
                                                                 style="margin: 0;padding: 0;vertical-align: top;padding-right: 10px;">
                                                                 <div class="inputt mar_btn_15">
-																	<?php 
+                                                                    <?php
 																	$state = $this->db->get_where('states', ['id' => $consumer->state_id])->row()->name;
 																	?>
-																	<input type="text" value="<?php echo $state ?>"/>
+                                                                    <input type="text" value="<?php echo $state ?>" />
                                                                     <SPAN>State</SPAN>
                                                                 </div>
                                                             </td>
                                                             <td
                                                                 style="margin: 0;padding: 0;vertical-align: top;padding-left: 10px;">
                                                                 <div class="inputt mar_btn_15">
-                                                                    <input type="text" value="<?php echo $consumer->zip ?>"/>
+                                                                    <input type="text"
+                                                                        value="<?php echo $consumer->zip ?>" />
                                                                     <SPAN>Zip Code</SPAN>
                                                                 </div>
                                                             </td>
@@ -727,13 +740,15 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <div class="chk_bx mar_btn_15">
-                                                                            <input type="checkbox" id="yes"
-                                                                                name="yes" value="yes" <?php echo $consumer->address_type != 'permanent' ? 'checked' : 'no' ?>> <label
-                                                                                for="yes">Yes</label><span
+                                                                            <input type="checkbox" id="yes" name="yes"
+                                                                                value="yes"
+                                                                                <?php echo $consumer->address_type != 'permanent' ? 'checked' : 'no' ?>>
+                                                                            <label for="yes">Yes</label><span
                                                                                 class="Hide_big">Hide_big</span><input
                                                                                 type="checkbox" id="no" name="no"
-                                                                                value="no" <?php echo $consumer->address_type == 'permanent' ? 'checked' : 'no' ?>> <label
-                                                                                for="no">No</label>
+                                                                                value="no"
+                                                                                <?php echo $consumer->address_type == 'permanent' ? 'checked' : 'no' ?>>
+                                                                            <label for="no">No</label>
                                                                         </div>
                                                                     </tr>
                                                                 </table>
@@ -753,11 +768,12 @@
                                                                         <td
                                                                             style="margin: 0;padding: 0;width:10%;vertical-align:middle;">
                                                                             <div class="chk_bx mar_btn_15">
-																				<?php 
+                                                                                <?php
 																				$tribal = $this->db->get_where('zipcodes', ['zipcode' => $consumer->zip])->row()->tribal == 1 ? true : false;
 																				?>
                                                                                 <input type="checkbox" id="tribal"
-                                                                                    name="tribal" value="tribal" <?php echo $tribal ? 'checked' : '' ?>>
+                                                                                    name="tribal" value="tribal"
+                                                                                    <?php echo $tribal ? 'checked' : '' ?>>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
@@ -770,7 +786,8 @@
                                                             is not the same as your home address.)</p>
                                                     </div>
                                                     <div class="inputt mar_top_5 mar_btn_5">
-                                                        <input type="text" value="<?php echo $shipping_address ?? null ?>"/>
+                                                        <input type="text"
+                                                            value="<?php echo $shipping_address ?? null ?>" />
                                                         <span>Street Number and Name</span>
                                                     </div>
                                                     <table width="100%" cellpadding="0" cellspacing="0" align=""
@@ -779,14 +796,16 @@
                                                             <td
                                                                 style="margin: 0;padding: 0;vertical-align: top;padding-right: 10px;">
                                                                 <div class="inputt mar_btn_5">
-                                                                    <input type="text" value="<?php echo $shipping_apt_room ?? null ?>"/>
+                                                                    <input type="text"
+                                                                        value="<?php echo $shipping_apt_room ?? null ?>" />
                                                                     <SPAN>Apt,Unit Etc.</SPAN>
                                                                 </div>
                                                             </td>
                                                             <td
                                                                 style="margin: 0;padding: 0;vertical-align: top;padding-left: 10px;">
                                                                 <div class="inputt mar_btn_5">
-                                                                    <input type="text" value="<?php echo $shipping_city ?? null ?>"/>
+                                                                    <input type="text"
+                                                                        value="<?php echo $shipping_city ?? null ?>" />
                                                                     <SPAN>City</SPAN>
                                                                 </div>
                                                             </td>
@@ -795,17 +814,18 @@
                                                             <td
                                                                 style="margin: 0;padding: 0;vertical-align: top;padding-right: 10px;">
                                                                 <div class="inputt mar_btn_15">
-																	<?php 
+                                                                    <?php
 																	$state = isset($shipping_state_id) ? $this->db->get_where('states', ['id' => $shipping_state_id])->row()->name : null;
 																	?>
-                                                                    <input type="text" value="<?php echo $state ?>"/>
+                                                                    <input type="text" value="<?php echo $state ?>" />
                                                                     <SPAN>State</SPAN>
                                                                 </div>
                                                             </td>
                                                             <td
                                                                 style="margin: 0;padding: 0;vertical-align: top;padding-left: 10px;">
                                                                 <div class="inputt mar_btn_15">
-                                                                    <input type="text" value="<?php echo $shipping_zip ?? null ?>"/>
+                                                                    <input type="text"
+                                                                        value="<?php echo $shipping_zip ?? null ?>" />
                                                                     <SPAN>Zip Code</SPAN>
                                                                 </div>
                                                             </td>
@@ -880,8 +900,8 @@
                                                 <h6 class="mar_btn_10">OMB APPROVAL EDITION 3060-0819</h6>
                                                 <div class="img_hdr">
                                                     <div class="img_hdr_innr">
-                                                        <img style="max-width: auto;"
-                                                            src="<?php echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; ?>" />
+                                                        <img style="max-width: auto;" src="<?php //echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; 
+																							?>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1053,8 +1073,8 @@
                                                 <h6 class="mar_btn_10">OMB APPROVAL EDITION 3060-0819</h6>
                                                 <div class="img_hdr">
                                                     <div class="img_hdr_innr">
-                                                        <img style="max-width: auto;"
-                                                            src="<?php echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; ?>" />
+                                                        <img style="max-width: auto;" src="<?php //echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; 
+																							?>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1084,15 +1104,17 @@
                                             <div class="mid">
                                                 <h4 class="mar_btn_7 page_5hd">Qualify through a government program</h4>
                                                 <div class="mid_innr frm mar_btn_15">
-													<?php foreach($lifeline_programs as $key): ?>
+                                                    <?php foreach ($lifeline_programs as $key) : ?>
                                                     <div class="chk_bx mar_btn_3">
-														<?php if($key->lifeline_program_id != 6): ?>
-                                                        <input type="checkbox" id="chk" name="chk" value="chk" <?php echo in_array($key->lifeline_program_id, $lifeline['program']) ? 'checked' : '' ?>><span
-															class="Hide_big">h</span><label for="chk"><?php echo $key->program ?></label>
-														<?php endif; ?>
-													</div>
-													<?php endforeach; ?>
-                                                
+                                                        <?php if ($key->lifeline_program_id != 6) : ?>
+                                                        <input type="checkbox" id="chk" name="chk" value="chk"
+                                                            <?php echo in_array($key->lifeline_program_id, $lifeline['program']) ? 'checked' : '' ?>><span
+                                                            class="Hide_big">h</span><label
+                                                            for="chk"><?php echo $key->program ?></label>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <?php endforeach; ?>
+
                                                     <div class="chk_bx mar_btn_3">
                                                         <label for="chk">Tribal Specific Programs</label>
                                                     </div>
@@ -1169,19 +1191,22 @@
                             <td valign="top" style="padding:0;">
                                 <table width="100%" cellpadding="0" cellspacing="0" align="" style="">
                                     <tr>
-                                        <td style="margin: 0;padding:0;border-bottom: 1px solid #979090;padding-bottom:10px;">
+                                        <td
+                                            style="margin: 0;padding:0;border-bottom: 1px solid #979090;padding-bottom:10px;">
                                             <div class="hdr">
                                                 <h6 class="mar_btn_13">FCC FORM 5629</h6>
                                                 <h2 class="mar_btn_10">Lifeline Program</h2>
                                                 <h2><b>Application Form</b></h2>
                                             </div>
                                         </td>
-                                        <td style="margin: 0;padding:0;text-align: right;border-bottom: 1px solid #979090;padding-bottom:10px;">
+                                        <td
+                                            style="margin: 0;padding:0;text-align: right;border-bottom: 1px solid #979090;padding-bottom:10px;">
                                             <div class="hdr">
                                                 <h6 class="mar_btn_10">OMB APPROVAL EDITION 3060-0819</h6>
                                                 <div class="img_hdr">
                                                     <div class="img_hdr_innr">
-                                                        <img style="max-width: auto;" src="<?php echo $_SERVER['DOCUMENT_ROOT'].'/wireless/assets/images/img1.jpg'; ?>"/>
+                                                        <img style="max-width: auto;" src="<?php //echo $_SERVER['DOCUMENT_ROOT'].'/wireless/assets/images/img1.jpg'; 
+																							?>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1213,15 +1238,17 @@
                                             <div class="mid">
                                                 <div class="mid_innr frm mar_btn_15">
 
-													<?php foreach($lifeline_agreements as $key): ?>
+                                                    <?php foreach ($lifeline_agreements as $key) : ?>
 
                                                     <div class="chk_bx mar_btn_7">
-                                                        <input type="checkbox" id="chk" name="chk" value="chk" <?php echo in_array($key->lifeline_agreement_id, $lifeline['agreement']) ? 'checked' : '' ?>><span
-                                                            class="Hide_big">h</span><label for="chk"><?php echo $key->agreement ?></label>
-													</div>
-													
-													<?php endforeach ?>
-                                               
+                                                        <input type="checkbox" id="chk" name="chk" value="chk"
+                                                            <?php echo in_array($key->lifeline_agreement_id, $lifeline['agreement']) ? 'checked' : '' ?>><span
+                                                            class="Hide_big">h</span><label
+                                                            for="chk"><?php echo $key->agreement ?></label>
+                                                    </div>
+
+                                                    <?php endforeach ?>
+
                                                 </div>
                                                 <div class="mid_innr frm bx2">
                                                     <table width="100%" cellpadding="0" cellspacing="0" align=""
@@ -1233,7 +1260,8 @@
                                                                     <p>Signature</p>
                                                                 </div>
                                                                 <div class="inputt mar_top_5">
-                                                                    <input type="text" value="<?php echo $lifeline['signature']['name'] ?>"/>
+                                                                    <input type="text"
+                                                                        value="<?php echo $lifeline['signature']['name'] ?>" />
                                                                 </div>
                                                             </td>
                                                             <td
@@ -1242,7 +1270,8 @@
                                                                     <p>Today’s Date</p>
                                                                 </div>
                                                                 <div class="inputt mar_top_5">
-                                                                    <input type="text" value="<?php echo date('m/d/Y') ?>"/>
+                                                                    <input type="text"
+                                                                        value="<?php echo date('m/d/Y') ?>" />
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -1306,8 +1335,8 @@
                                                 <h6 class="mar_btn_10">OMB APPROVAL EDITION 3060-0819</h6>
                                                 <div class="img_hdr">
                                                     <div class="img_hdr_innr">
-                                                        <img style="max-width: auto;"
-                                                            src="<?php echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; ?>" />
+                                                        <img style="max-width: auto;" src="<?php //echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; 
+																							?>" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -1459,8 +1488,9 @@
                                                 <h6 class="mar_btn_10">OMB APPROVAL EDITION 3060-0819</h6>
                                                 <div class="img_hdr">
                                                     <div class="img_hdr_innr">
-                                                        <img style="max-width: auto;"
-                                                            src="<?php echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; ?>" />
+       
+                                                 <img style="max-width: auto;" src="<?php //echo $_SERVER['DOCUMENT_ROOT'] . '/wireless/assets/images/img1.jpg'; 
+																							?>" />
                                                     </div>
                                                 </div>
                                             </div>
