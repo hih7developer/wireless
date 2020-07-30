@@ -96,12 +96,12 @@ class ApplicationController extends CI_Controller
 		$data['service_provider_state'] = $this->plan->get_service_provider_states();
 
 
-		
+
 		//check if any pending application with same seller
 		$seller_id = $this->db->get_where('plans', ['plan_id' => $plan_id])->row()->user_id;
 		$seller_plans = $this->db->get_where('plans', ['user_id' => $seller_id])->result();
 		$pending_applications = $this->db->where_in('plan_id', array_column($seller_plans, 'plan_id'))->where('status', 'pending')->get('applications')->num_rows();
-		if($pending_applications > 0){
+		if ($pending_applications > 0) {
 			$this->session->set_flashdata('error', "There is already an application applied and pending for review, please wait or contact administration");
 			redirect('plans/search/' . $data['consumer']->state_id);
 		}
@@ -357,8 +357,8 @@ class ApplicationController extends CI_Controller
 
 
 		// Output the generated PDF to Browser
-		// $pdf = $dompdf->output();
-		$dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
+		$pdf = $dompdf->output();
+		// $dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
 
 
 		$filename = uniqid() . '.pdf';
@@ -576,13 +576,13 @@ class ApplicationController extends CI_Controller
 			"application_id" => $application_id,
 			"order_timestamp" => $this->db->get_where('applications', ['application_id' => $application_id])->row()->created_at,
 			"plan_name" => $this->db->get_where('plans', ['user_id' => $plan->user_id])->row()->name,
-			"application_url" => base_url('carrier/application/details/'.$application_id),
+			"application_url" => base_url('carrier/application/details/' . $application_id),
 		];
 
 		$this->postmark($mail);
 
 
-		
+
 		// $mail['email'] = $this->db->get_where('users', ['user_id' => $user_id])->row()->email;
 		$mail['email'] = 'sjgalaxy98@gmail.com';
 		$mail['template_id'] = 14192860;
@@ -591,7 +591,7 @@ class ApplicationController extends CI_Controller
 			"company" =>  $this->db->get_where('service_providers', ['user_id' => $plan->user_id])->row()->name,
 			"contact_phone" =>  $this->db->get_where('service_providers', ['user_id' => $plan->user_id])->row()->contact_no,
 			"application_id" => $application_id,
-			"application_url" => base_url('consumer/application/details/'.$application_id),
+			"application_url" => base_url('consumer/application/details/' . $application_id),
 		];
 
 		$this->postmark($mail);
