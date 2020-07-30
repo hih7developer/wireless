@@ -6,7 +6,7 @@
             <?php include('inc/dashboard_tab.php') ?>
             <div class="capa-outr">
                 <div class="planinf">
-                    <div class="plasec_one">Application Summery</div>
+                    <div class="plasec_one">Application Summary</div>
                 </div>
                 <div class="profile_info_sec">
                     <div class="personalinfo_sec">
@@ -42,7 +42,7 @@
 
                                 
                                 <div class="cmmn_title">
-                                    <h2>Aplication Info</h2>
+                                    <h2>Application Info</h2>
                                 </div>
 
                                 <div class="form-group">
