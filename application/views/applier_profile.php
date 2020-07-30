@@ -6,32 +6,32 @@
             <?php include('inc/dashboard_tab.php') ?>
             <div class="capa-outr">
                 <div class="planinf">
-                    <div class="plasec_one">Applicantion Details</div>
+                    <div class="plasec_one">Application Details</div>
                 </div>
                 <?php
-                switch ($application['status']) {
-                    case 'incomplete':
-                        $status_class = 'warning';
-                        break;
+				switch ($application['status']) {
+					case 'incomplete':
+						$status_class = 'warning';
+						break;
 
-                    case 'rejected':
-                        $status_class = 'warning';
-                        break;
+					case 'rejected':
+						$status_class = 'warning';
+						break;
 
-                    case 'approved':
-                        $status_class = 'success';
-                        break;
+					case 'approved':
+						$status_class = 'success';
+						break;
 
-                    case 'cancelled':
-                        $status_class = 'primary';
-                        break;
+					case 'cancelled':
+						$status_class = 'primary';
+						break;
 
-                    case 'pending':
-                        $status_class = 'primary';
-                        break;
-                }
+					case 'pending':
+						$status_class = 'primary';
+						break;
+				}
 
-                ?>
+				?>
                 <div class="profile_info_sec">
 
                     <div class="personalinfo_sec">
@@ -127,13 +127,13 @@
                             </div>
                         </div>
 
-						<?php if ($application['is_nv_enable'] == 1) : ?>
+                        <?php if ($application['is_nv_enable'] == 1) : ?>
 
                         <?php
 
-                        $nv_success = json_decode($application['nv_response']);
+							$nv_success = json_decode($application['nv_response']);
 
-                        ?>
+							?>
 
                         <div class="row">
                             <div class="col-md-12">
@@ -164,7 +164,7 @@
                             </div>
                         </div>
 
-						<?php endif ?>
+                        <?php endif ?>
 
 
 
@@ -233,7 +233,7 @@
 
                     </div>
 
-					<?php if ($application['is_nv_enable'] == 1) : ?>
+                    <?php if ($application['is_nv_enable'] == 1) : ?>
 
                     <div class="passchange_sec">
 
@@ -339,7 +339,7 @@
                         <?php endif; ?>
                     </div>
 
-					<?php endif; ?>
+                    <?php endif; ?>
 
 
                 </div>
