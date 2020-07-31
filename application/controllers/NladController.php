@@ -263,7 +263,7 @@ class NladController extends CI_Controller
 			"contactUrbCode" => "",
 			"repId" => Null,
 			"repNotAssisted" => 1,
-			"carrierUrl" => "https://wirelessmatchup.com"
+			"carrierUrl" => "https://gotruewireless.com"
 		);
 
 		$data_string = json_encode($customer_data);
