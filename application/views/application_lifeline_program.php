@@ -62,7 +62,7 @@
 
                                 <h2>Agreement</h2>
 
-                                <div class="lifeline_agreement_invalid invalid-feedback">Please check agreements. </div>
+                                <div class="lifeline_agreement_invalid invalid-feedback">Please check all agreements. </div>
 
                                 <div class="pdng35">
                                     <?php foreach($lifeline_agreements as $key): ?>
@@ -138,13 +138,15 @@ function programValidity() {
 
 function agreementValidity() {
     var fields = $("input[name='lifeline[agreement][]']").serializeArray();
-    if (fields.length === 0) {
+	var total = $("input[name='lifeline[agreement][]']").length;
+    if (fields.length < total) {
         $('.lifeline_agreement_invalid').show();
         return false;
-    } else {
+    } else if(fields.length === total) {
         $('.lifeline_agreement_invalid').hide();
         return true;
     }
+	return false;
 }
 
 // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -156,8 +158,8 @@ function agreementValidity() {
         // Loop over them and prevent submission
         var validation = Array.prototype.filter.call(forms, function(form) {
             form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false && programValidity() &&
-                    agreementValidity()) {
+                if (programValidity() === false || 
+                    agreementValidity() === false || form.checkValidity() === false) {
                     event.preventDefault();
                     event.stopPropagation();
                 }
