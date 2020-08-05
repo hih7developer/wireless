@@ -91,14 +91,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="">Tribal Yes</label>
-                            <input type="text" name="service_provider[tribal_yes]" id="" class="form-control"
+                            <label for="">Lifeline Yes Tribal Yes</label>
+                            <input type="text" name="charge_amount[lifeline_yes_tribal_yes]" id="" class="form-control"
                                 placeholder="Tribal Yes Price">
                         </div>
 
                         <div class="form-group">
-                            <label for="">Tribal No</label>
-                            <input type="text" name="service_provider[tribal_no]" id="" class="form-control"
+                            <label for="">Lifeline Yes Tribal No</label>
+                            <input type="text" name="charge_amount[lifeline_yes_tribal_no]" id="" class="form-control"
+                                placeholder="Tribal No Price">
+						</div>
+						
+                        <div class="form-group">
+                            <label for="">Lifeline No</label>
+                            <input type="text" name="charge_amount[lifeline_no]" id="" class="form-control"
                                 placeholder="Tribal No Price">
                         </div>
 
@@ -158,11 +164,18 @@ $(document).on('click', '.edit_carrier_admin', function() {
         },
         dataType: 'json',
         success: function(data) {
-            console.log(data);
-            $('input[name="carrier_admin[name]"]').val(data.user_name);
-            $('input[name="carrier_admin[email]"]').val(data.user_email);
-            $('input[name="service_provider[tribal_yes]"]').val(data.tribal_yes);
-            $('input[name="service_provider[tribal_no]"]').val(data.tribal_no);
+			$('input[name="carrier_admin[name]"]').val(data.user_name);
+			$('input[name="carrier_admin[email]"]').val(data.user_email);
+			var charge_amount = JSON.parse(data.charge_amount);
+            if(charge_amount !== null){
+				$('input[name="charge_amount[lifeline_yes_tribal_yes]"]').val(charge_amount.lifeline_yes_tribal_yes);
+				$('input[name="charge_amount[lifeline_yes_tribal_no]"]').val(charge_amount.lifeline_yes_tribal_no);
+				$('input[name="charge_amount[lifeline_no]"]').val(charge_amount.lifeline_no);
+			} else {
+				$('input[name="charge_amount[lifeline_yes_tribal_yes]"]').val(null);
+				$('input[name="charge_amount[lifeline_yes_tribal_no]"]').val(null);
+				$('input[name="charge_amount[lifeline_no]"]').val(null);
+			}
         }
     });
 
@@ -205,8 +218,7 @@ $("input[name='carrier_admin[email]']").focusout(function() {
     var id = $('#hidden_id').val();
     if (email != '') {
         $.ajax({
-            url: '<?php echo base_url('
-            UserController / email_check / ') ?>' + id,
+            url: '<?php echo base_url('UserController/email_check/') ?>' + id,
             data: {
                 'email': email
             },

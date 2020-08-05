@@ -392,7 +392,7 @@ class UserController extends CI_Controller
 	public function edit_carrier_admin_action_ajax($id)
 	{
 		$carrier_admin = $this->input->post('carrier_admin');
-		$service_provider = $this->input->post('service_provider');
+		$service_provider['charge_amount'] = json_encode($this->input->post('charge_amount'));
 		$this->db->update('service_providers', $service_provider, ['user_id' => $id]);
 		$this->user->update_user_where_id($id, $carrier_admin);
 	}

@@ -11,10 +11,8 @@ class Payment extends CI_Model
     
     public function __construct(){
         parent::__construct();
-        $this->authorize['merchant_login_id'] = '4KJH456Lvrs';
-        $this->authorize['merchant_transaction_key'] = '978g423XUfZ9Gwn7';
-        // $this->authorize['merchant_login_id'] = '8X7vDXDb4m4F';
-        // $this->authorize['merchant_transaction_key'] = '5p3b876U3As34MkK';
+        $this->authorize['merchant_login_id'] = $this->config->item('authorize_net_merchant_login_id');
+        $this->authorize['merchant_transaction_key'] = $this->config->item('authorize_net_merchant_transaction_key');
 
     }
 
@@ -53,9 +51,10 @@ class Payment extends CI_Model
         $paymentProfiles[] = $paymentProfile;
 
 
-        // Create a new CustomerProfileType and add the payment profile object
+		// Create a new CustomerProfileType and add the payment profile object
+		$role = ucwords($this->db->get_where('roles', ['role_id' => $user->role_id])->row()->name);
         $customerProfile = new AnetAPI\CustomerProfileType();
-        $customerProfile->setDescription("Customer 2 Test PHP");
+        $customerProfile->setDescription("$role: $user->name");
         $customerProfile->setMerchantCustomerId("M_" . time());
         $customerProfile->setEmail($user->email);
         $customerProfile->setpaymentProfiles($paymentProfiles);
@@ -169,8 +168,9 @@ class Payment extends CI_Model
 
     public function chargeCustomerProfile($application_id)
     {
-        $plan = $this->db->get_where('applications', ['application_id' => $application_id])->row();
-        $user_id = $this->db->get_where('plans', ['plan_id' => $plan->plan_id])->row()->user_id;
+        $application = $this->db->get_where('applications', ['application_id' => $application_id])->row();
+        $plan = $this->db->get_where('plans', ['plan_id' => $application->plan_id])->row();
+        $user_id = $plan->user_id;
         $payment_methods = $this->db->get_where('payment_methods', ['user_id' => $user_id])->row();
 
         if(empty($payment_methods)){
@@ -180,12 +180,20 @@ class Payment extends CI_Model
         $profileid = $payment_methods->customer_profile_id;
         $paymentprofileid = $payment_methods->customer_payment_profile_id;
 
-        //
         $amount_type = $plan->tribal_plan == 1 ? 'tribal_yes' : 'tribal_no';
-        if($plan->tribal_plan == 1)
-            $amount = $this->db->get_where('service_providers', ['user_id' => $user_id])->row()->tribal_yes;
-        else
-            $amount = $this->db->get_where('service_providers', ['user_id' => $user_id])->row()->tribal_no;
+		$charge_amount = $this->db->get_where('service_providers', ['user_id' => $user_id])->row()->charge_amount;
+		if($charge_amount == null){
+            return "Something went wrong";
+		} else {
+			$charge_amount = json_decode($charge_amount);
+		}
+
+		if($plan->tribal_plan == 1 && $plan->lifeline_service == 1)
+			$amount = $charge_amount->lifeline_yes_tribal_yes;
+		else if($plan->tribal_plan != 1 && $plan->lifeline_service == 1)
+			$amount = $charge_amount->lifeline_yes_tribal_no;
+		else if($plan->lifeline_service != 1)
+			$amount = $charge_amount->lifeline_no;
         /* Create a merchantAuthenticationType object with authentication details
         retrieved from the constants file */
         $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
@@ -211,8 +219,8 @@ class Payment extends CI_Model
         $request->setRefId( $refId);
         $request->setTransactionRequest( $transactionRequestType);
         $controller = new AnetController\CreateTransactionController($request);
-        $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
-        // $response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
+        // $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
+        $response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
 
         if ($response != null)
         {
