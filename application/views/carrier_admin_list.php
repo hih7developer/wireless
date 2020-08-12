@@ -91,19 +91,19 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="">Lifeline Yes Tribal Yes</label>
+                            <label for="">Lifeline - Tribal</label>
                             <input type="text" name="charge_amount[lifeline_yes_tribal_yes]" id="" class="form-control"
                                 placeholder="Tribal Yes Price">
                         </div>
 
                         <div class="form-group">
-                            <label for="">Lifeline Yes Tribal No</label>
+                            <label for="">Lifeline - Non-Tribal</label>
                             <input type="text" name="charge_amount[lifeline_yes_tribal_no]" id="" class="form-control"
                                 placeholder="Tribal No Price">
 						</div>
 						
                         <div class="form-group">
-                            <label for="">Lifeline No</label>
+                            <label for="">Non-Lifeline</label>
                             <input type="text" name="charge_amount[lifeline_no]" id="" class="form-control"
                                 placeholder="Tribal No Price">
                         </div>

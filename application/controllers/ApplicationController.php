@@ -568,8 +568,8 @@ class ApplicationController extends CI_Controller
 		//---------------------- New Application submit Email-----------------------------------
 
 
-		// $mail['email'] = $this->db->get_where('users', ['user_id' => $plan->user_id])->row()->email;
-		$mail['email'] = 'sjgalaxy98@gmail.com';
+		$mail['email'] = $this->db->get_where('users', ['user_id' => $plan->user_id])->row()->email;
+		// $mail['email'] = 'sjgalaxy98@gmail.com';
 		$mail['template_id'] = 14214394;
 		$mail['details'] = [
 			"carrier_name" =>  $this->db->get_where('users', ['user_id' => $plan->user_id])->row()->name,
@@ -583,8 +583,8 @@ class ApplicationController extends CI_Controller
 
 
 
-		// $mail['email'] = $this->db->get_where('users', ['user_id' => $user_id])->row()->email;
-		$mail['email'] = 'sjgalaxy98@gmail.com';
+		$mail['email'] = $this->db->get_where('users', ['user_id' => $user_id])->row()->email;
+		// $mail['email'] = 'sjgalaxy98@gmail.com';
 		$mail['template_id'] = 14192860;
 		$mail['details'] = [
 			"first_name" =>  $this->db->get_where('users', ['user_id' => $plan->user_id])->row()->name,

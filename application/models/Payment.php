@@ -87,7 +87,9 @@ class Payment extends CI_Model
           
 
             return true;
-        } else {
+        } else if (is_null($response) && !isset($errorMessages)){
+			return "Sandbox and production mode confilct";
+		} else {
             $errorMessages = $response->getMessages()->getMessage();
             return "Response : " . $errorMessages[0]->getCode() . "  " .$errorMessages[0]->getText();
         }
@@ -104,7 +106,9 @@ class Payment extends CI_Model
         $merchantAuthentication->setTransactionKey($this->authorize['merchant_transaction_key']);
         
         // Set the transaction's refId
-        $refId = 'ref' . time();
+		$refId = 'ref' . time();
+		
+		// echo $customerProfileId;die;
 
         $request = new AnetAPI\GetCustomerPaymentProfileRequest();
         $request->setMerchantAuthentication($merchantAuthentication);
@@ -114,7 +118,8 @@ class Payment extends CI_Model
         
         $controller = new AnetController\GetCustomerPaymentProfileController($request);
         $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
-        // $response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
+		// $response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
+	
    
         if (($response != null) && ($response->getMessages()->getResultCode() == "Ok"))
         {
@@ -158,9 +163,9 @@ class Payment extends CI_Model
                 $errorMessages = $response->getMessages()->getMessage();
                 return "Failed to Update Customer Payment Profile :  " . $errorMessages[0]->getCode() . "  " .$errorMessages[0]->getText();
             }
-        }
-        else
-        {
+        } else if (is_null($response) && !isset($errorMessages)){
+			return "Sandbox and production mode confilct";
+		} else {
             return "Failed to Get Customer Payment Profile :  " . $errorMessages[0]->getCode() . "  " .$errorMessages[0]->getText();
         }
 
@@ -182,18 +187,18 @@ class Payment extends CI_Model
 
         $amount_type = $plan->tribal_plan == 1 ? 'tribal_yes' : 'tribal_no';
 		$charge_amount = $this->db->get_where('service_providers', ['user_id' => $user_id])->row()->charge_amount;
-		if($charge_amount == null){
-            return "Something went wrong";
-		} else {
+		if($charge_amount != null){
 			$charge_amount = json_decode($charge_amount);
+			if($plan->tribal_plan == 1 && $plan->lifeline_service == 1)
+				$amount = $charge_amount->lifeline_yes_tribal_yes;
+			else if($plan->tribal_plan != 1 && $plan->lifeline_service == 1)
+				$amount = $charge_amount->lifeline_yes_tribal_no;
+			else if($plan->lifeline_service != 1)
+				$amount = $charge_amount->lifeline_no;
+		} else {
+            $amount = 0;
 		}
 
-		if($plan->tribal_plan == 1 && $plan->lifeline_service == 1)
-			$amount = $charge_amount->lifeline_yes_tribal_yes;
-		else if($plan->tribal_plan != 1 && $plan->lifeline_service == 1)
-			$amount = $charge_amount->lifeline_yes_tribal_no;
-		else if($plan->lifeline_service != 1)
-			$amount = $charge_amount->lifeline_no;
         /* Create a merchantAuthenticationType object with authentication details
         retrieved from the constants file */
         $merchantAuthentication = new AnetAPI\MerchantAuthenticationType();
@@ -219,8 +224,8 @@ class Payment extends CI_Model
         $request->setRefId( $refId);
         $request->setTransactionRequest( $transactionRequestType);
         $controller = new AnetController\CreateTransactionController($request);
-        // $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
-        $response = $controller->executeWithApiResponse( \net\authorize\api\constants\ANetEnvironment::SANDBOX);
+        $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::PRODUCTION);
+        // $response = $controller->executeWithApiResponse(\net\authorize\api\constants\ANetEnvironment::SANDBOX);
 
         if ($response != null)
         {
@@ -320,5 +325,3 @@ class Payment extends CI_Model
 
     }
 }
-
-?>

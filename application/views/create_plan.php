@@ -338,7 +338,7 @@ $('.cstm_select2').select2({
         if($(this).val() == 1){
             $('.lifeline_discount').html('34.25');
         } else{
-            $('.lifeline_discount').html('9.99');
+            $('.lifeline_discount').html('9.25');
         }
     });
 </script>

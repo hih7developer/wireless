@@ -13,7 +13,7 @@
 	"require": {
 		"php": ">=5.3.7",
 		"wildbit/postmark-php": "^2.10",
-		"authorizenet/authorizenet": "2.0.0",
+		"authorizenet/authorizenet": "^2.0",
 		"dompdf/dompdf": "^0.8.5"
 	},
 	"suggest": {
