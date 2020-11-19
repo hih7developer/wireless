@@ -4,12 +4,12 @@
     <div class="container-fluid">
         <div class="dashboard-tab-innr">
             <?php include('inc/dashboard_tab.php') ?>
-			<nav aria-label="breadcrumb">
-				<ol class="breadcrumb application-breadcrumb">
-					<li class="breadcrumb-item"><a href="<?php echo base_url('/') ?>">Plans</a></li>
-					<li class="breadcrumb-item active" aria-current="page"><a href="#">Profile Details</a></li>
-				</ol>
-			</nav>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb application-breadcrumb">
+                    <li class="breadcrumb-item"><a href="<?php echo base_url('/') ?>">Plans</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="#">Profile Details</a></li>
+                </ol>
+            </nav>
             <div class="capa-outr">
                 <div class="planinf">
                     <div class="plasec_one">Profile Details</div>
@@ -36,7 +36,8 @@
                             <div class="alert alert-success nlad-error" role="alert">
 
                                 <p class="text-center text-success">
-                                    <strong><?php echo $this->session->flashdata('nv_success_status') ?></strong></p>
+                                    <strong><?php echo $this->session->flashdata('nv_success_status') ?></strong>
+                                </p>
 
                                 <ol style="margin: 0;">
                                     <li>Eligibility check successful</li>
@@ -56,7 +57,8 @@
                             <?php if ($this->session->flashdata('nv_error')) : ?>
                             <div class="alert alert-danger nlad-error" role="alert">
                                 <p class="text-center text-danger">
-                                    <strong><?php echo $this->session->flashdata('nv_error_status') ?></strong></p>
+                                    <strong><?php echo $this->session->flashdata('nv_error_status') ?></strong>
+                                </p>
 
 
 
@@ -170,7 +172,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <!-- <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="s">Lifeline Program</label>
                                         <select name="consumer[lifeline_program]" id="lifeline_program"
@@ -204,10 +206,10 @@
                                             Please select lifeline program.
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
-                            <div class="row income_otr"
+                            <!-- <div class="row income_otr"
                                 style="display:<?php echo $consumer->lifeline_program == 'Income Based Eligibility' ? '' : 'none' ?>">
                                 <div class="col-md-12">
                                     <div class="form-group">
@@ -217,7 +219,7 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
 
                             <!-- Sec 2 -->
@@ -766,7 +768,7 @@ $("input[name='user[email]']").focusout(function() {
     var email = $(this).val();
     if (email != '') {
         $.ajax({
-            url: '<?php echo base_url('UserController/email_check/'.$user->user_id) ?>',
+            url: '<?php echo base_url('UserController/email_check/' . $user->user_id) ?>',
             data: {
                 'email': email
             },

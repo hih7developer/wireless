@@ -526,6 +526,7 @@ class UserController extends CI_Controller
 		$data['consumerID'] = $this->user->get_user_by_id($data['user']->user_id);
 		// $data['carrier_admin'] = $this->user->get_carrier_admin_by_id($user_id);
 		$data['service_provider_state'] = $this->plan->get_service_provider_states();
+		$data['lifelines'] = $this->db->get('lifeline_programs')->result();
 
 		$this->load->view('consumer_profile', $data);
 	}
@@ -587,7 +588,8 @@ class UserController extends CI_Controller
 <option value="">Select income</option>
 <?php
 		foreach ($income as $key => $value) : ?>
-<option value="<?php echo ($key + 1 )." Adults in my household making $".$value ?>"><?php echo $key + 1 ?> Adults in my household making $<?php echo $value ?></option>
+<option value="<?php echo ($key + 1) . " Adults in my household making $" . $value ?>"><?php echo $key + 1 ?> Adults in
+    my household making $<?php echo $value ?></option>
 <?php endforeach;
 	}
 	// end consumer

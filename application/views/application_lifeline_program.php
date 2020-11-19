@@ -38,7 +38,8 @@
                                     <div class="checkbox checkbox-primary">
                                         <input
                                             class="profile_field <?php echo $key->lifeline_program_id == 6 ? 'income_program' : 'gov_program' ?>"
-                                            name="lifeline[program][]" type="checkbox"
+											name="lifeline[program][]" type="checkbox"
+											<?php echo $consumer->lifeline_program === $key->lifeline_program_id ? 'selected' : '' ?>
                                             value="<?php echo $key->lifeline_program_id ?>">
                                         <label class="container checklabel"><?php echo $key->program ?></label>
                                     </div>

@@ -51,11 +51,11 @@
                     <div class="personalinfo_sec cmmn_title">
                         <form action="<?php echo base_url('UserController/edit_consumer_profile') ?>"
                             id="consumer_profile_form" method="post" class="needs-validation" novalidate>
-                            <?php if($this->session->flashdata('error')): ?>
+                            <?php if ($this->session->flashdata('error')) : ?>
                             <div class="alert alert-danger nlad-error" role="alert">
                                 <ol style="margin: 0;">
-                                    <?php foreach($this->session->flashdata('error') as $key => $value): ?>
-                                    <li><?php echo $value[0].': '.$value[1] ?></li>
+                                    <?php foreach ($this->session->flashdata('error') as $key => $value) : ?>
+                                    <li><?php echo $value[0] . ': ' . $value[1] ?></li>
                                     <?php endforeach; ?>
                                 </ol>
                             </div>
@@ -64,25 +64,26 @@
 
 
 
-                            <?php if($this->session->flashdata('nv_success')): ?>
+                            <?php if ($this->session->flashdata('nv_success')) : ?>
                             <?php $nv_success = $this->session->flashdata('nv_success'); ?>
                             <div class="alert alert-success nlad-error" role="alert">
 
                                 <p class="text-center text-success">
-                                    <strong><?php echo $this->session->flashdata('nv_success_status') ?></strong></p>
+                                    <strong><?php echo $this->session->flashdata('nv_success_status') ?></strong>
+                                </p>
 
                                 <ol style="margin: 0;">
                                     <li>Eligibility check successful</li>
-									<?php if(isset($nv_success['eligibilityExpirationDate'])): ?>
+                                    <?php if (isset($nv_success['eligibilityExpirationDate'])) : ?>
                                     <li>Eligibility Expiration Date:
                                         <?php echo date('m/d/Y', strtotime($nv_success['eligibilityExpirationDate']))  ?>
                                     </li>
-									<?php endif; ?>
-									<?php if(isset($nv_success['lastManualReviewTime'])): ?>
+                                    <?php endif; ?>
+                                    <?php if (isset($nv_success['lastManualReviewTime'])) : ?>
                                     <li>Last Manual Review Time:
                                         <?php echo date('m/d/Y H:i:s', strtotime($nv_success['lastManualReviewTime']))  ?>
                                     </li>
-									<?php endif; ?>
+                                    <?php endif; ?>
                                 </ol>
                             </div>
                             <?php endif; ?>
@@ -90,10 +91,11 @@
 
 
 
-                            <?php if($this->session->flashdata('nv_error')): ?>
+                            <?php if ($this->session->flashdata('nv_error')) : ?>
                             <div class="alert alert-danger nlad-error" role="alert">
                                 <p class="text-center text-danger">
-                                    <strong><?php echo $this->session->flashdata('nv_error_status') ?></strong></p>
+                                    <strong><?php echo $this->session->flashdata('nv_error_status') ?></strong>
+                                </p>
 
 
 
@@ -101,25 +103,25 @@
 
                                 <ol style="margin: 0;">
 
-                                    <?php if(in_array($this->session->flashdata('nv_error_status'), ['BAD_REQUEST'])):  ?>
-                                    <?php foreach($this->session->flashdata('nv_error') as $key): ?>
-                                    <li><?php echo $key['field'].': '.$key['description'] ?></li>
+                                    <?php if (in_array($this->session->flashdata('nv_error_status'), ['BAD_REQUEST'])) :  ?>
+                                    <?php foreach ($this->session->flashdata('nv_error') as $key) : ?>
+                                    <li><?php echo $key['field'] . ': ' . $key['description'] ?></li>
                                     <?php endforeach; ?>
                                     <?php endif; ?>
 
-                                    <?php if(in_array($this->session->flashdata('nv_error_status'), ['PENDING_RESOLUTION'])):  ?>
-                                    <?php foreach($this->session->flashdata('nv_error') as $key): ?>
+                                    <?php if (in_array($this->session->flashdata('nv_error_status'), ['PENDING_RESOLUTION'])) :  ?>
+                                    <?php foreach ($this->session->flashdata('nv_error') as $key) : ?>
                                     <li><?php echo ucwords(strtolower($key)) ?></li>
                                     <?php endforeach; ?>
                                     <?php endif; ?>
 
-                                    <?php if(in_array($this->session->flashdata('nv_error_status'), ['PENDING_RESOLUTION'])){
-                                        echo '<li>Resolution: <a class="text-danger" style="font-size:14px;" href="'.$this->session->flashdata('nv_error_links')['resolution']['href'].'" target="_blank" rel="noopener noreferrer">Click Here</a></li>';
-                                    } else if(in_array($this->session->flashdata('nv_error_status'), ['PENDING_CERT'])){
-                                        print_r($this->session->flashdata('nv_error_link'));
-                                        echo '<li>Certification: <a href="'.$this->session->flashdata('nv_error_links')['certification']['href'].'" target="_blank" rel="noopener noreferrer">Click Here</a></li>';
-                                    }
-                                ?>
+                                    <?php if (in_array($this->session->flashdata('nv_error_status'), ['PENDING_RESOLUTION'])) {
+											echo '<li>Resolution: <a class="text-danger" style="font-size:14px;" href="' . $this->session->flashdata('nv_error_links')['resolution']['href'] . '" target="_blank" rel="noopener noreferrer">Click Here</a></li>';
+										} else if (in_array($this->session->flashdata('nv_error_status'), ['PENDING_CERT'])) {
+											print_r($this->session->flashdata('nv_error_link'));
+											echo '<li>Certification: <a href="' . $this->session->flashdata('nv_error_links')['certification']['href'] . '" target="_blank" rel="noopener noreferrer">Click Here</a></li>';
+										}
+										?>
 
                                 </ol>
 
@@ -213,29 +215,11 @@
                                         <select name="consumer[lifeline_program]" id="lifeline_program"
                                             class="profile_field">
                                             <option value="" disabled selected>Select lifeline program</option>
-                                            <option value="Food Stamps/SNAP"
-                                                <?php echo $consumer->lifeline_program == 'Food Stamps/SNAP' ? 'selected' : '' ?>>
-                                                Food Stamps/SNAP</option>
-                                            <option value="Medicaid"
-                                                <?php echo $consumer->lifeline_program == 'Medicaid' ? 'selected' : '' ?>>
-                                                Medicaid</option>
-                                            <option value="Supplemental Security Income (SSI)"
-                                                <?php echo $consumer->lifeline_program == 'Supplemental Security Income (SSI)' ? 'selected' : '' ?>>
-                                                Supplemental Security Income (SSI)</option>
-                                            <option value="Section 8/Federal Public Housing Assistance"
-                                                <?php echo $consumer->lifeline_program == 'Section 8/Federal Public Housing Assistance' ? 'selected' : '' ?>>
-                                                Section 8/Federal Public Housing Assistance</option>
-                                            <option value="Bureau of Indian Affairs General Assistance"
-                                                <?php echo $consumer->lifeline_program == 'Bureau of Indian Affairs General Assistance' ? 'selected' : '' ?>>
-                                                Bureau of Indian Affairs General Assistance</option>
-                                            <option
-                                                value="Federal Veterans Affairs (VA) Veterans Pension or Survivors Pension"
-                                                <?php echo $consumer->lifeline_program == 'Federal Veterans Affairs (VA) Veterans Pension or Survivors Pension' ? 'selected' : '' ?>>
-                                                Federal Veterans Affairs (VA) Veterans Pension or Survivors
-                                                Pension</option>
-                                            <option value="Income Based Eligibility"
-                                                <?php echo $consumer->lifeline_program == 'Income Based Eligibility' ? 'selected' : '' ?>>
-                                                Income Based Eligibility </option>
+                                            <?php foreach ($lifelines as $key) : ?>
+                                            <option value="<?php echo $key->lifeline_program_id ?>"
+                                                <?php echo $consumer->lifeline_program == $key->lifeline_program_id ? 'selected' : '' ?>>
+                                                <?php echo $key->program ?></option>
+                                            <?php endforeach; ?>
                                         </select>
                                         <div class="invalid-feedback">
                                             Please select lifeline program.
@@ -329,7 +313,7 @@
                                         <label for="s">State*</label>
                                         <select class="form-control profile_field" name="consumer[state_id]" id="state">
                                             <option>Select state</option>
-                                            <?php foreach($service_provider_state as $key): ?>
+                                            <?php foreach ($service_provider_state as $key) : ?>
                                             <option value="<?php echo $key->id ?>"
                                                 <?php echo $consumer->state_id == $key->id ? 'selected' : '' ?>
                                                 data-code="<?php echo $key->code ?>"><?php echo $key->name ?>
@@ -473,14 +457,14 @@
                             <h2>Change Password</h2>
                         </div>
 
-                        <?php if($this->session->flashdata('ps_error')): ?>
+                        <?php if ($this->session->flashdata('ps_error')) : ?>
                         <div class="alert alert-danger" role="alert">
                             <?php echo $this->session->flashdata('ps_error')  ?>
                         </div>
                         <?php endif; ?>
 
                         <form
-                            action="<?php echo base_url('UserController/update_password_consumer_profile/'.$consumerID->user_id)?>"
+                            action="<?php echo base_url('UserController/update_password_consumer_profile/' . $consumerID->user_id) ?>"
                             name="password_reset" method="POST">
                             <div class="form-group">
                                 <input type="password" class="form-control" name="prev_ps"
@@ -514,9 +498,9 @@
                 </div>
                 <div class="pdng35 text-center">
                     <button type="submit" class="btn btn-default formbtn" form="consumer_profile_form">Update</button>
-                    <a href="<?php echo base_url('nv/check/'.$user->user_id) ?>"
+                    <a href="<?php echo base_url('nv/check/' . $user->user_id) ?>"
                         class="btn btn-default formbtn nv_check_btn">Check Eligibility</a>
-                    <a href="<?php echo base_url('nlad/check/'.$user->user_id) ?>"
+                    <a href="<?php echo base_url('nlad/check/' . $user->user_id) ?>"
                         class="btn btn-default formbtn nlad_check_btn">Verify My Info</a>
                     <input type="hidden" name="profile_field_touched" value="0">
                 </div>
@@ -558,7 +542,7 @@
 })();
 </script>
 
-<?php if($this->session->flashdata('success')): ?>
+<?php if ($this->session->flashdata('success')) : ?>
 <script>
 Swal.fire(
     'Good job!',
@@ -788,8 +772,7 @@ $("input[name='user[email]']").focusout(function() {
     var email = $(this).val();
     if (email != '') {
         $.ajax({
-            url: '<?php echo base_url('
-            UserController / email_check / '.$user->user_id) ?>',
+            url: '<?php echo base_url('UserController/email_check/' . $user->user_id) ?>',
             data: {
                 'email': email
             },
@@ -821,12 +804,11 @@ $("input[name='user[email]']").focusout(function() {
 $(document).on('change', '#lifeline_program', function() {
     var val = $(this).val();
     var state = $('#state').val();
-    if (val == 'Income Based Eligibility') {
+    if (val == 6) {
         $('.income_otr').show();
         $('.income_otr #income').attr('required', 'required');
         $.ajax({
-            url: '<?php echo base_url('
-            UserController / get_income_options ') ?>',
+            url: '<?php echo base_url('UserController/get_income_options') ?>',
             data: {
                 'state': state
             },
@@ -850,7 +832,7 @@ $(document).on('change', '#state', function() {
 });
 </script>
 
-<?php if($consumer->lifeline_program == 'Income Based Eligibility'): ?>
+<?php if ($consumer->lifeline_program == 6) : ?>
 <script>
 $('#lifeline_program').change();
 setTimeout(() => {
